@@ -7,45 +7,48 @@
   },
   "favicon": "/favicon.svg",
   "colors": {
-    "primary": "#0D9373",
+    "primary": "#014536",
     "light": "#07C983",
-    "dark": "#0D9373",
+    "dark": "#014536",
     "anchors": {
-      "from": "#0D9373",
+      "from": "#014536",
       "to": "#07C983"
     }
   },
   "topbarLinks": [
     {
       "name": "Support",
-      "url": "mailto:hi@mintlify.com"
+      "url": "mailto:md@agd.sa"
     }
   ],
   "topbarCtaButton": {
-    "name": "Dashboard",
-    "url": "https://dashboard.mintlify.com"
+    "name": "Postman Collection",
+    "url": "https://documenter.getpostman.com/view/34108325/2sA3kd9GpM"
   },
   "tabs": [
     {
       "name": "API Reference",
       "url": "api-reference"
+    },
+    {
+      "name": "FAQ",
+      "url": "faq"
+    },
+    {
+      "name": "Changelog",
+      "url": "changelog"
     }
   ],
   "anchors": [
     {
       "name": "Documentation",
       "icon": "book-open-cover",
-      "url": "https://mintlify.com/docs"
+      "url": "https://agdejar.sa"
     },
     {
-      "name": "Community",
+      "name": "Community (Coming Soon)",
       "icon": "slack",
-      "url": "https://mintlify.com/community"
-    },
-    {
-      "name": "Blog",
-      "icon": "newspaper",
-      "url": "https://mintlify.com/blog"
+      "url": "https://agdejar.sa"
     }
   ],
   "navigation": [
