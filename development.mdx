@@ -1,97 +1,167 @@
 ---
-title: 'Development'
-description: 'Learn how to preview changes locally'
+title: 'Development Guide'
+description: 'Set up your development environment for AGD Ejar API integration'
 ---
 
+## Development Setup
+
 <Info>
-  **Prerequisite**: Please install Node.js (version 19 or higher) before proceeding.
+  **Prerequisites**: 
+  - A code editor (VS Code recommended)
+  - Postman for API testing
+  - AGD Ejar API credentials
 </Info>
 
-Step 1. Install Mintlify on your OS:
+### 1. Environment Setup
+
+First, set up your development environment variables:
 
 <CodeGroup>
 
-```bash npm
-npm i -g mintlify
+```bash .env
+# API Configuration
+AGDEJAR_URL=https://app.agdejar.sa
+CLIENT_ID=your_client_id
+CLIENT_SECRET=your_client_secret
+
+# Optional Configuration
+DEBUG=true
+ENVIRONMENT=development
 ```
 
-```bash yarn
-yarn global add mintlify
+```javascript config.js
+const config = {
+  baseUrl: process.env.AGDEJAR_URL,
+  auth: {
+    clientId: process.env.CLIENT_ID,
+    clientSecret: process.env.CLIENT_SECRET
+  },
+  debug: process.env.DEBUG === 'true'
+};
+
+export default config;
 ```
 
 </CodeGroup>
 
-Step 2. Go to the docs are located (where you can find `mint.json`) and run the following command:
+### 2. Authentication Helper
 
-```bash
-mintlify dev
-```
-
-The documentation website is now available at `http://localhost:3000`.
-
-### Custom Ports
-
-Mintlify uses port 3000 by default. You can use the `--port` flag to customize the port Mintlify runs on. For example, use this command to run in port 3333:
-
-```bash
-mintlify dev --port 3333
-```
-
-You will see an error like this if you try to run Mintlify in a port that's already taken:
-
-```md
-Error: listen EADDRINUSE: address already in use :::3000
-```
-
-## Mintlify Versions
-
-Each CLI is linked to a specific version of Mintlify. Please update the CLI if your local website looks different than production.
+Create a helper function to manage authentication:
 
 <CodeGroup>
 
-```bash npm
-npm i -g mintlify@latest
+```javascript JavaScript
+async function getAccessToken() {
+  const response = await fetch(`${config.baseUrl}/oauth/token`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'multipart/form-data'
+    },
+    body: new URLSearchParams({
+      grant_type: 'client_credentials',
+      client_id: config.auth.clientId,
+      client_secret: config.auth.clientSecret,
+      scope: 'read'
+    })
+  });
+  
+  return response.json();
+}
 ```
 
-```bash yarn
-yarn global upgrade mintlify
+```python Python
+import requests
+
+def get_access_token():
+    response = requests.post(
+        f"{config['base_url']}/oauth/token",
+        headers={'Content-Type': 'multipart/form-data'},
+        data={
+            'grant_type': 'client_credentials',
+            'client_id': config['auth']['client_id'],
+            'client_secret': config['auth']['client_secret'],
+            'scope': 'read'
+        }
+    )
+    return response.json()
 ```
 
 </CodeGroup>
 
-## Deployment
+## Testing Tools
 
-<Tip>
-  Unlimited editors available under the [Pro
-  Plan](https://mintlify.com/pricing) and above.
-</Tip>
+### Postman Setup
 
-You should see the following if the deploy successfully went through:
+1. Import our [Postman Collection](https://documenter.getpostman.com/view/34108325/2sA3kd9GpM)
+2. Create an environment with these variables:
+   - `base_url`: https://app.agdejar.sa
+   - `client_id`: Your client ID
+   - `client_secret`: Your client secret
+   - `access_token`: Will be automatically set after authentication
 
-<Frame>
-  <img src="/images/checks-passed.png" style={{ borderRadius: '0.5rem' }} />
-</Frame>
+## Error Handling
+
+Implement proper error handling in your development environment:
+
+```javascript
+try {
+  const response = await makeApiCall();
+  if (!response.ok) {
+    const error = await response.json();
+    console.error('API Error:', error);
+    // Handle specific error cases
+    switch (error.code) {
+      case 'TOKEN_EXPIRED':
+        await refreshToken();
+        break;
+      // Add other error cases
+    }
+  }
+} catch (err) {
+  console.error('Network Error:', err);
+}
+```
+
+## Best Practices
+
+1. **Rate Limiting**
+   - Implement exponential backoff
+   - Cache responses where appropriate
+   - Monitor API usage
+
+2. **Security**
+   - Never commit credentials to version control
+   - Use environment variables
+   - Implement proper token management
+
+3. **Debugging**
+   - Enable debug logs in development
+   - Use proper error handling
+   - Monitor API responses
 
 ## Troubleshooting
 
-Here's how to solve some common problems when working with the CLI.
-
 <AccordionGroup>
-  <Accordion title="Mintlify is not loading">
-    Update to Node v18. Run `mintlify install` and try again.
+  <Accordion title="Authentication Failures">
+    - Verify your credentials are correct
+    - Check token expiration
+    - Ensure proper Content-Type headers
   </Accordion>
-  <Accordion title="No such file or directory on Windows">
-Go to the `C:/Users/Username/.mintlify/` directory and remove the `mint`
-folder. Then Open the Git Bash in this location and run `git clone
-https://github.com/mintlify/mint.git`.
-
-Repeat step 3.
-
+  <Accordion title="Rate Limiting Issues">
+    - Implement request throttling
+    - Add proper error handling
+    - Contact support for limit adjustments
   </Accordion>
-  <Accordion title="Getting an unknown error">
-    Try navigating to the root of your device and delete the ~/.mintlify folder.
-    Then run `mintlify dev` again.
+  <Accordion title="Integration Problems">
+    - Check our [API Reference](/api-reference/introduction)
+    - Review [Common Issues](/faq/common-issues/troubleshooting)
+    - Contact [support](mailto:md@agd.sa)
   </Accordion>
 </AccordionGroup>
 
-Curious about what changed in a CLI version? [Check out the CLI changelog.](/changelog/command-line)
+## Need Help?
+
+If you encounter any issues during development:
+- Email us at [md@agd.sa](mailto:md@agd.sa)
+- Check our [API Status](https://stats.uptimerobot.com/koyjLJpRaj)
+- Review our [FAQ](/faq/introduction)

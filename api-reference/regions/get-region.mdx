@@ -1,0 +1,26 @@
+---
+title: "Get Region"
+api: "GET /tenant/v1/regions/{region_id}"
+description: "Get region details by ID"
+---
+
+### Path Parameters
+
+<ParamField path="region_id" type="integer" required>
+  The ID of the region
+</ParamField>
+
+### Headers
+
+<ParamField header="Accept" type="string" required>
+  Must be "application/json"
+</ParamField>
+
+<RequestExample>
+```bash
+curl --request GET \
+  --url /tenant/v1/regions/1 \
+  --header 'Accept: application/json' \
+  --header 'Authorization: Bearer {access_token}'
+```
+</RequestExample> 

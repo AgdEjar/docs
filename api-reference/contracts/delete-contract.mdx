@@ -1,0 +1,26 @@
+---
+title: "Delete Contract"
+api: "DELETE /tenant/v1/contracts/{contract_id}"
+description: "Delete a contract"
+---
+
+### Path Parameters
+
+<ParamField path="contract_id" type="integer" required>
+  The ID of the contract to delete
+</ParamField>
+
+### Headers
+
+<ParamField header="Accept" type="string" required>
+  Must be "application/json"
+</ParamField>
+
+<RequestExample>
+```bash
+curl --request DELETE \
+  --url /tenant/v1/contracts/19 \
+  --header 'Accept: application/json' \
+  --header 'Authorization: Bearer {access_token}'
+```
+</RequestExample> 

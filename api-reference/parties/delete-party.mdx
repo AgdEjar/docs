@@ -1,0 +1,26 @@
+---
+title: "Delete Party"
+api: "DELETE /tenant/v1/parties/{id}"
+description: "Delete a party"
+---
+
+### Path Parameters
+
+<ParamField path="id" type="integer" required>
+  The ID of the party to delete
+</ParamField>
+
+### Headers
+
+<ParamField header="Accept" type="string" required>
+  Must be "application/json"
+</ParamField>
+
+<RequestExample>
+```bash
+curl --request DELETE \
+  --url /tenant/v1/parties/1 \
+  --header 'Accept: application/json' \
+  --header 'Authorization: Bearer {access_token}'
+```
+</RequestExample> 

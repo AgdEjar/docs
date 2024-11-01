@@ -1,0 +1,40 @@
+---
+title: "Search Deed Remote"
+api: "POST /tenant/v1/properties/search-deed/remote"
+description: "Search for a property deed from remote system"
+---
+
+### Headers
+
+<ParamField header="Accept" type="string" required>
+  Must be "application/json"
+</ParamField>
+
+### Body
+
+<ParamField body="deed_id" type="number" required>
+  The ID of the deed to search for
+</ParamField>
+
+<ParamField body="owner_id" type="string" required>
+  The owner's ID number/nationality ID
+</ParamField>
+
+<ParamField body="date" type="string" required>
+  The date in Hijri format (YYYY-MM-DD)
+</ParamField>
+
+<RequestExample>
+```bash
+curl --request POST \
+  --url /tenant/v1/properties/search-deed/remote \
+  --header 'Accept: application/json' \
+  --header 'Content-Type: application/json' \
+  --header 'Authorization: Bearer {access_token}' \
+  --data '{
+    "deed_id": 525416008427,
+    "owner_id": "1061608236",
+    "date": "1404-09-06"
+  }'
+```
+</RequestExample> 

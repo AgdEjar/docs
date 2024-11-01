@@ -1,0 +1,141 @@
+---
+title: 'API Reference'
+description: 'Complete guide to AGD Ejar API endpoints'
+---
+
+## Todo List & Implementation Status
+
+### Authentication (100% Ready)
+<Check>OAuth token endpoint implementation</Check>
+<Check>Client verification endpoint implementation</Check>
+
+### Property Management
+<Check>Property registration and updates (98% ready)</Check>
+<Check>Unit management within properties (98% ready)</Check>
+<Check>Deed search and verification</Check>
+<Check>Remote deed search integration</Check>
+
+### Contract Management
+<Check>Residential contract issuance (90% ready)</Check>
+<Check>Commercial contract handling (45% ready)</Check>
+<Check>Financial information management (95% ready)</Check>
+<Check>Contract terms management (90% ready)</Check>
+<Check>Payment schedule management (88% ready)</Check>
+<Check>Utilities management (60% ready)</Check>
+
+### Party Information (100% Ready)
+<Check>National Information Center integration</Check>
+<Check>Individual data verification</Check>
+<Check>IBAN management for individuals</Check>
+<Check>Ministry of Commerce integration</Check>
+<Check>Entity data verification</Check>
+<Check>IBAN management for entities</Check>
+
+### Contract Operations
+<Check>Contract listing and viewing</Check>
+<Check>Contract PDF generation</Check>
+<Check>Contract status tracking</Check>
+<Check>Invoice and payment monitoring</Check>
+<Check>Receipt voucher management</Check>
+
+### Location Services
+<Check>City management implementation</Check>
+<Check>Region management implementation</Check>
+<Check>Address validation services</Check>
+
+## Base URL
+
+All API requests should be made to:
+
+```bash
+https://app.agdejar.sa
+```
+
+<Note>
+  Make sure to use HTTPS for all API calls to ensure secure communication.
+</Note>
+
+## Authentication
+
+Our API uses OAuth 2.0 Bearer token authentication. All API calls require an authentication token.
+
+### Available Endpoints
+- [Get OAuth Token](/api-reference/auth/oauth-token) - Obtain access token
+- [Get Client Info](/api-reference/auth/client) - Verify client setup
+
+## Property Management
+
+Comprehensive property management including deed verification and property details.
+
+### Available Endpoints
+- [Search Deed](/api-reference/properties/search-deed) - Search for property deed
+- [Sync Deed](/api-reference/properties/sync-deed) - Synchronize deed information
+- [Search Deed Remote](/api-reference/properties/search-deed-remote) - Remote deed search
+- [List Properties](/api-reference/properties/list-properties) - Get all properties
+- [Get Property](/api-reference/properties/get-property) - Get property details
+- [Update Property](/api-reference/properties/update-property) - Update property information
+- [Delete Property](/api-reference/properties/delete-property) - Remove property
+
+## Unit Management
+
+Manage individual units within properties.
+
+### Available Endpoints
+- [List Units](/api-reference/units/list-units) - Get all units
+- [Get Unit](/api-reference/units/get-unit) - Get unit details
+- [Update Unit](/api-reference/units/update-unit) - Update unit information
+- [Delete Unit](/api-reference/units/delete-unit) - Remove unit
+
+## Location Management
+
+Manage cities and regions for property addresses.
+
+### Available Endpoints
+- [List Cities](/api-reference/cities/list-cities) - Get all cities
+- [Get City](/api-reference/cities/get-city) - Get city details
+- [List Regions](/api-reference/regions/list-regions) - Get all regions
+- [Get Region](/api-reference/regions/get-region) - Get region details
+
+## Party Management
+
+Manage property owners, tenants, and other parties.
+
+### Available Endpoints
+- [Search Party](/api-reference/parties/search-party) - Search for parties
+- [Update Party](/api-reference/parties/update-party) - Update party information
+- [Delete Party](/api-reference/parties/delete-party) - Remove party
+
+## Contract Management
+
+Complete contract lifecycle management.
+
+### Available Endpoints
+- [Download Contract PDF](/api-reference/contracts/download-pdf) - Get contract document
+- [List Contracts](/api-reference/contracts/list-contracts) - Get all contracts
+- [Create Contract](/api-reference/contracts/create-contract) - Create new contract
+- [Update Contract](/api-reference/contracts/update-contract) - Update contract details
+- [Delete Contract](/api-reference/contracts/delete-contract) - Remove contract
+
+## Response Format
+
+All responses are returned in JSON format. Successful responses will have a 200 status code.
+
+## Rate Limiting
+
+Please contact support for information about rate limits for your specific use case.
+
+## Error Handling
+
+The API uses standard HTTP response codes:
+- 200: Success
+- 400: Bad Request
+- 401: Unauthorized
+- 403: Forbidden
+- 404: Not Found
+- 500: Internal Server Error
+
+## Need Help?
+
+If you need assistance with the API:
+- Email: [md@agd.sa](mailto:md@agd.sa)
+- Check our [Postman Collection](https://documenter.getpostman.com/view/34108325/2sA3kd9GpM)

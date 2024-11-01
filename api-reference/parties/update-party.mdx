@@ -1,0 +1,66 @@
+---
+title: "Update Party"
+api: "PUT /tenant/v1/parties/{id}"
+description: "Update party information"
+---
+
+### Path Parameters
+
+<ParamField path="id" type="integer" required>
+  The ID of the party to update
+</ParamField>
+
+### Headers
+
+<ParamField header="Accept" type="string" required>
+  Must be "application/json"
+</ParamField>
+
+### Body
+
+<ParamField body="id_number" type="string" required>
+  National ID number
+</ParamField>
+
+<ParamField body="full_name" type="string" required>
+  Full name of the party
+</ParamField>
+
+<ParamField body="phone_number" type="string" required>
+  Phone number with country code
+</ParamField>
+
+<ParamField body="date_of_birth" type="string">
+  Date of birth in YYYY-MM-DD format
+</ParamField>
+
+<ParamField body="date_of_birth_hijri" type="string">
+  Date of birth in Hijri calendar
+</ParamField>
+
+<ParamField body="region_id" type="integer">
+  Region ID
+</ParamField>
+
+<ParamField body="city_id" type="integer">
+  City ID
+</ParamField>
+
+<RequestExample>
+```bash
+curl --request PUT \
+  --url /tenant/v1/parties/1 \
+  --header 'Accept: application/json' \
+  --header 'Content-Type: application/json' \
+  --header 'Authorization: Bearer {access_token}' \
+  --data '{
+    "id_number": "1016690206",
+    "full_name": "فلان الفلاني تجريبي",
+    "phone_number": "+966567890317",
+    "date_of_birth": "1990-01-01",
+    "date_of_birth_hijri": "1410-05-12",
+    "region_id": 2,
+    "city_id": 57
+  }'
+```
+</RequestExample> 

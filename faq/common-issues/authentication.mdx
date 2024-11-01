@@ -1,0 +1,15 @@
+---
+title: 'Authentication Issues'
+description: 'Common authentication problems and solutions'
+---
+
+## OAuth Token Issues
+
+### Invalid Client Credentials
+**Problem**: Receiving `401 Unauthorized` response when requesting an access token.
+
+**Solution**:
+1. Verify your `client_id` and `client_secret` are correct
+2. Make sure you're using HTTPS
+3. Check that your credentials haven't expired
+4. Ensure the Authorization header is properly formatted 

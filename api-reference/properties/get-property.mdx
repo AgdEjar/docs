@@ -1,0 +1,26 @@
+---
+title: "Get Property"
+api: "GET /tenant/v1/properties/{documentNumber}"
+description: "Get property details by document number"
+---
+
+### Path Parameters
+
+<ParamField path="documentNumber" type="integer" required>
+  The document number of the property
+</ParamField>
+
+### Headers
+
+<ParamField header="Accept" type="string" required>
+  Must be "application/json"
+</ParamField>
+
+<RequestExample>
+```bash
+curl --request GET \
+  --url /tenant/v1/properties/525416008427 \
+  --header 'Accept: application/json' \
+  --header 'Authorization: Bearer {access_token}'
+```
+</RequestExample> 

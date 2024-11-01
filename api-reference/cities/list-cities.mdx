@@ -1,0 +1,26 @@
+---
+title: "List Cities"
+api: "GET /tenant/v1/cities"
+description: "Get a list of all cities"
+---
+
+### Headers
+
+<ParamField header="Accept" type="string" required>
+  Must be "application/json"
+</ParamField>
+
+### Query Parameters
+
+<ParamField query="filters[name_ar][$contains]" type="string">
+  Filter cities by Arabic name (optional)
+</ParamField>
+
+<RequestExample>
+```bash
+curl --request GET \
+  --url '/tenant/v1/cities?filters[name_ar][$contains]=شقراء' \
+  --header 'Accept: application/json' \
+  --header 'Authorization: Bearer {access_token}'
+```
+</RequestExample> 

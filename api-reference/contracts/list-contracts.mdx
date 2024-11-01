@@ -1,0 +1,20 @@
+---
+title: "List Contracts"
+api: "GET /tenant/v1/contracts"
+description: "Get a list of all contracts"
+---
+
+### Headers
+
+<ParamField header="Accept" type="string" required>
+  Must be "application/json"
+</ParamField>
+
+<RequestExample>
+```bash
+curl --request GET \
+  --url /tenant/v1/contracts \
+  --header 'Accept: application/json' \
+  --header 'Authorization: Bearer {access_token}'
+```
+</RequestExample> 

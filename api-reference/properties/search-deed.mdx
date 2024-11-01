@@ -1,0 +1,30 @@
+---
+title: "Search Deed"
+api: "POST /tenant/v1/properties/search-deed"
+description: "Search for a property deed by ID"
+---
+
+### Headers
+
+<ParamField header="Accept" type="string" required>
+  Must be "application/json"
+</ParamField>
+
+### Body
+
+<ParamField body="deed_id" type="number" required>
+  The ID of the deed to search for
+</ParamField>
+
+<RequestExample>
+```bash
+curl --request POST \
+  --url /tenant/v1/properties/search-deed \
+  --header 'Accept: application/json' \
+  --header 'Content-Type: application/json' \
+  --header 'Authorization: Bearer {access_token}' \
+  --data '{
+    "deed_id": 920227005017
+  }'
+```
+</RequestExample> 

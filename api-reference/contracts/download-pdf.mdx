@@ -1,0 +1,26 @@
+---
+title: "Download Contract PDF"
+api: "GET /tenant/v1/contracts/download-pdf/{contract_id}"
+description: "Download a contract in PDF format"
+---
+
+### Path Parameters
+
+<ParamField path="contract_id" type="integer" required>
+  The ID of the contract to download
+</ParamField>
+
+### Headers
+
+<ParamField header="Accept" type="string" required>
+  Must be "application/json"
+</ParamField>
+
+<RequestExample>
+```bash
+curl --request GET \
+  --url /tenant/v1/contracts/download-pdf/7 \
+  --header 'Accept: application/json' \
+  --header 'Authorization: Bearer {access_token}'
+```
+</RequestExample> 

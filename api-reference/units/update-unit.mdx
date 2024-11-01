@@ -1,0 +1,71 @@
+---
+title: "Update Unit"
+api: "PUT /tenant/v1/units/{id}"
+description: "Update unit information"
+---
+
+### Path Parameters
+
+<ParamField path="id" type="integer" required>
+  The ID of the unit to update
+</ParamField>
+
+### Headers
+
+<ParamField header="Accept" type="string" required>
+  Must be "application/json"
+</ParamField>
+
+### Body
+
+<ParamField body="unit_number" type="string" required>
+  Unique unit number
+</ParamField>
+
+<ParamField body="floor_number" type="integer" required>
+  Floor number
+</ParamField>
+
+<ParamField body="rooms" type="integer" required>
+  Number of rooms (minimum 1)
+</ParamField>
+
+<ParamField body="unit_usage" type="string" required>
+  Usage type (residential_families, residential_singles)
+</ParamField>
+
+<ParamField body="unit_type" type="string" required>
+  Type of unit (apartment, floor, villa, building, tower, duplex, studio, secondary_apartment, apartment_extension, floor_extension, penthouse_villa, drivers_room, land_lot, other)
+</ParamField>
+
+<ParamField body="area" type="number">
+  Unit area
+</ParamField>
+
+<ParamField body="amenities_bedrooms" type="integer">
+  Number of bedrooms [0-10]
+</ParamField>
+
+<ParamField body="amenities_bathrooms_full" type="integer">
+  Number of full bathrooms [0-10]
+</ParamField>
+
+<RequestExample>
+```bash
+curl --request PUT \
+  --url /tenant/v1/units/2 \
+  --header 'Accept: application/json' \
+  --header 'Content-Type: application/json' \
+  --header 'Authorization: Bearer {access_token}' \
+  --data '{
+    "unit_number": "A-0005",
+    "floor_number": 1,
+    "rooms": 1,
+    "unit_usage": "residential_families",
+    "unit_type": "apartment",
+    "area": 200,
+    "amenities_bedrooms": 3,
+    "amenities_bathrooms_full": 2
+  }'
+```
+</RequestExample> 

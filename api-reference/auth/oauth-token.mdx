@@ -1,0 +1,59 @@
+---
+title: "OAuth Token"
+api: "POST /oauth/token"
+description: "Get an OAuth token for authentication"
+---
+
+### Body
+
+<ParamField body="grant_type" type="string" required>
+  The grant type for the OAuth token request. Must be "client_credentials".
+</ParamField>
+
+<ParamField body="client_id" type="string" required>
+  Your client ID
+</ParamField>
+
+<ParamField body="client_secret" type="string" required>
+  Your client secret
+</ParamField>
+
+<ParamField body="scope" type="string" required>
+  The scope of access requested. Use "read".
+</ParamField>
+
+### Response
+
+<ResponseField name="access_token" type="string">
+  The OAuth access token to use for authenticated requests
+</ResponseField>
+
+<ResponseField name="token_type" type="string">
+  The type of token (usually "Bearer")
+</ResponseField>
+
+<ResponseField name="expires_in" type="number">
+  Token expiration time in seconds
+</ResponseField>
+
+<RequestExample>
+```bash
+curl --request POST \
+  --url /oauth/token \
+  --header 'Content-Type: multipart/form-data' \
+  --form 'grant_type=client_credentials' \
+  --form 'client_id={{client_id}}' \
+  --form 'client_secret={{client_secret}}' \
+  --form 'scope=read'
+```
+</RequestExample>
+
+<ResponseExample>
+```json
+{
+  "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9...",
+  "token_type": "Bearer",
+  "expires_in": 3600
+}
+```
+</ResponseExample> 

@@ -1,0 +1,20 @@
+---
+title: "Search Party"
+api: "GET /tenant/v1/parties/search-party"
+description: "Search for parties"
+---
+
+### Headers
+
+<ParamField header="Accept" type="string" required>
+  Must be "application/json"
+</ParamField>
+
+<RequestExample>
+```bash
+curl --request GET \
+  --url /tenant/v1/parties/search-party \
+  --header 'Accept: application/json' \
+  --header 'Authorization: Bearer {access_token}'
+```
+</RequestExample> 

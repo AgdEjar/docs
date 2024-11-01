@@ -1,0 +1,70 @@
+---
+title: "Create Contract"
+api: "POST /tenant/v1/contracts"
+description: "Create a new contract"
+---
+
+### Headers
+
+<ParamField header="Accept" type="string" required>
+  Must be "application/json"
+</ParamField>
+
+### Body
+
+<ParamField body="duration" type="integer" required>
+  Contract duration in years
+</ParamField>
+
+<ParamField body="contract_type" type="string" required>
+  Type of contract (residential, commercial)
+</ParamField>
+
+<ParamField body="parties" type="array" required>
+  Array of parties involved in the contract
+</ParamField>
+
+<ParamField body="unit_id" type="string" required>
+  ID of the unit being contracted
+</ParamField>
+
+<ParamField body="rental_fee" type="object" required>
+  Rental fee details including total_units_rent and billing_type
+</ParamField>
+
+<ParamField body="terms" type="object">
+  Contract terms and conditions
+</ParamField>
+
+<RequestExample>
+```bash
+curl --request POST \
+  --url /tenant/v1/contracts \
+  --header 'Accept: application/json' \
+  --header 'Content-Type: application/json' \
+  --header 'Authorization: Bearer {access_token}' \
+  --data '{
+    "duration": 1,
+    "contract_type": "residential",
+    "parties": [
+      {
+        "role": "lessor",
+        "id": 1
+      },
+      {
+        "role": "tenant",
+        "id": 2
+      }
+    ],
+    "unit_id": "1945",
+    "rental_fee": {
+      "total_units_rent": 10000,
+      "billing_type": "monthly"
+    },
+    "terms": {
+      "residential_auto_renewal": 0,
+      "notice_period_in_days": 30
+    }
+  }'
+```
+</RequestExample> 

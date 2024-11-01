@@ -1,0 +1,26 @@
+---
+title: "Delete Unit"
+api: "DELETE /tenant/v1/units/{id}"
+description: "Delete a unit"
+---
+
+### Path Parameters
+
+<ParamField path="id" type="integer" required>
+  The ID of the unit to delete
+</ParamField>
+
+### Headers
+
+<ParamField header="Accept" type="string" required>
+  Must be "application/json"
+</ParamField>
+
+<RequestExample>
+```bash
+curl --request DELETE \
+  --url /tenant/v1/units/1 \
+  --header 'Accept: application/json' \
+  --header 'Authorization: Bearer {access_token}'
+```
+</RequestExample> 

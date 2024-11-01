@@ -1,0 +1,91 @@
+---
+title: "Update Property"
+api: "PUT /tenant/v1/properties/{id}"
+description: "Update property information"
+---
+
+### Path Parameters
+
+<ParamField path="id" type="integer" required>
+  The ID of the property to update
+</ParamField>
+
+### Headers
+
+<ParamField header="Accept" type="string" required>
+  Must be "application/json"
+</ParamField>
+
+### Body
+
+<ParamField body="property_name" type="string">
+  Name of the property
+</ParamField>
+
+<ParamField body="property_number" type="string">
+  Property number
+</ParamField>
+
+<ParamField body="document_number" type="string">
+  Document number
+</ParamField>
+
+<ParamField body="document_date" type="string">
+  Document date in YYYY-MM-DD format
+</ParamField>
+
+<ParamField body="property_type" type="string">
+  Type of property (building, villa, plaza, shopping_mall, tower, land, other)
+</ParamField>
+
+<ParamField body="ownership_document_type" type="string">
+  Type of ownership document (electronic_title_deed, paper_title_deed, hojjat, other, virtual)
+</ParamField>
+
+<ParamField body="property_usage" type="string">
+  Property usage type (residential_families, residential_singles, commercial, mixed)
+</ParamField>
+
+<ParamField body="property_total_floors" type="integer">
+  Total number of floors
+</ParamField>
+
+<ParamField body="property_units_per_floor" type="integer">
+  Number of units per floor
+</ParamField>
+
+<ParamField body="address_region_id" type="integer">
+  Region ID for the address
+</ParamField>
+
+<ParamField body="address_city_id" type="integer">
+  City ID for the address
+</ParamField>
+
+<ParamField body="owner_id" type="string">
+  Owner's ID number
+</ParamField>
+
+<RequestExample>
+```bash
+curl --request PUT \
+  --url /tenant/v1/properties/2 \
+  --header 'Accept: application/json' \
+  --header 'Content-Type: application/json' \
+  --header 'Authorization: Bearer {access_token}' \
+  --data '{
+    "property_name": "Your property name",
+    "property_number": "0",
+    "document_number": "525416008427",
+    "document_date": "1444-05-30",
+    "property_type": "building",
+    "ownership_document_type": "electronic_title_deed",
+    "property_usage": "residential_families",
+    "property_total_floors": 5,
+    "property_units_per_floor": 10,
+    "address_region_id": 2,
+    "address_city_id": 57,
+    "owner_id": "1016690206"
+  }'
+```
+</RequestExample> 

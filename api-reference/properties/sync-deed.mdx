@@ -1,0 +1,26 @@
+---
+title: "Sync Deed"
+api: "POST /tenant/v1/properties/sync-deed/{id}"
+description: "Synchronize a property deed"
+---
+
+### Path Parameters
+
+<ParamField path="id" type="integer" required>
+  The ID of the deed to synchronize
+</ParamField>
+
+### Headers
+
+<ParamField header="Accept" type="string" required>
+  Must be "application/json"
+</ParamField>
+
+<RequestExample>
+```bash
+curl --request POST \
+  --url /tenant/v1/properties/sync-deed/2 \
+  --header 'Accept: application/json' \
+  --header 'Authorization: Bearer {access_token}'
+```
+</RequestExample> 

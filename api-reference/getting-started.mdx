@@ -1,0 +1,196 @@
+---
+title: 'Getting Started'
+description: 'Learn how to integrate with AGD Ejar API'
+---
+
+## Overview
+
+AGD Ejar API allows your application to manage properties, contracts, and interact with Saudi Arabia's Ejar platform through a simplified interface. Our API consolidates complex Ejar operations into simple, efficient calls.
+
+## Authentication
+
+All API requests must include your API key in the Authorization header. You can obtain your API credentials by contacting our support team.
+
+### Configuration Examples
+
+<CodeGroup>
+
+```bash Curl
+AGDEJAR_URL="https://app.agdejar.sa"
+API_KEY="your_api_key_here"
+
+curl --location --request POST "$AGDEJAR_URL/oauth/token" \
+  --header "Authorization: Bearer $API_KEY" \
+  --header 'Content-Type: application/json' \
+  --data-raw '{
+    "grant_type": "client_credentials",
+    "client_id": "your_client_id",
+    "client_secret": "your_client_secret",
+    "scope": "read"
+  }'
+```
+
+```python Python
+import requests
+
+AGDEJAR_URL = "https://app.agdejar.sa"
+API_KEY = "your_api_key_here"
+
+headers = {
+    "Authorization": f"Bearer {API_KEY}",
+    "Content-Type": "application/json"
+}
+
+response = requests.post(
+    f"{AGDEJAR_URL}/oauth/token",
+    headers=headers,
+    json={
+        "grant_type": "client_credentials",
+        "client_id": "your_client_id",
+        "client_secret": "your_client_secret",
+        "scope": "read"
+    }
+)
+```
+
+```javascript JavaScript
+const AGDEJAR_URL = 'https://app.agdejar.sa';
+const API_KEY = 'your_api_key_here';
+
+const response = await fetch(`${AGDEJAR_URL}/oauth/token`, {
+  method: 'POST',
+  headers: {
+    'Authorization': `Bearer ${API_KEY}`,
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    grant_type: 'client_credentials',
+    client_id: 'your_client_id',
+    client_secret: 'your_client_secret',
+    scope: 'read'
+  })
+});
+```
+
+```go Go
+package main
+
+import (
+    "bytes"
+    "encoding/json"
+    "net/http"
+)
+
+const (
+    AGDEJAR_URL = "https://app.agdejar.sa"
+    API_KEY     = "your_api_key_here"
+)
+
+func main() {
+    data := map[string]string{
+        "grant_type":    "client_credentials",
+        "client_id":     "your_client_id",
+        "client_secret": "your_client_secret",
+        "scope":         "read",
+    }
+    
+    jsonData, _ := json.Marshal(data)
+    
+    req, _ := http.NewRequest("POST", AGDEJAR_URL+"/oauth/token", bytes.NewBuffer(jsonData))
+    req.Header.Set("Authorization", "Bearer "+API_KEY)
+    req.Header.Set("Content-Type", "application/json")
+    
+    client := &http.Client{}
+    resp, _ := client.Do(req)
+}
+```
+
+</CodeGroup>
+
+## Quick Start Guide
+
+1. **Get API Credentials**
+   - Contact [support](mailto:md@agd.sa) to obtain your API credentials
+   - You'll receive a `client_id` and `client_secret`
+
+2. **Authentication**
+   - [Get an access token](/api-reference/auth/oauth-token)
+   - Use the token in subsequent requests
+
+3. **Make Your First Request**
+   - Try listing properties or searching for a deed
+   - Check response formats and handle errors appropriately
+
+## Base URL
+
+All API requests should be made to:
+
+```bash
+https://app.agdejar.sa
+```
+
+## Request Headers
+
+All requests should include:
+
+```bash
+Authorization: Bearer YOUR_ACCESS_TOKEN
+Content-Type: application/json
+Accept: application/json
+```
+
+## Response Format
+
+All responses are returned in JSON format. A typical success response looks like:
+
+```json
+{
+  "data": {
+    // Response data here
+  },
+  "meta": {
+    // Metadata, pagination info, etc.
+  }
+}
+```
+
+## Error Handling
+
+The API uses conventional HTTP response codes:
+
+| Code | Description |
+|------|-------------|
+| 200  | Success |
+| 400  | Bad Request - Invalid parameters |
+| 401  | Unauthorized - Invalid API key |
+| 403  | Forbidden - Insufficient permissions |
+| 404  | Not Found - Resource doesn't exist |
+| 500  | Server Error - Please contact support |
+
+Error response format:
+
+```json
+{
+  "error": {
+    "code": "ERROR_CODE",
+    "message": "Human readable error message",
+    "details": {
+      // Additional error details
+    }
+  }
+}
+```
+
+## Rate Limiting
+
+<Note>
+  Contact support for information about rate limits for your specific use case.
+</Note>
+
+## Need Help?
+
+If you need assistance:
+- Email us at [md@agd.sa](mailto:md@agd.sa)
+- Check our [API Reference](/api-reference/introduction)
+- View our [Status Page](https://stats.uptimerobot.com/koyjLJpRaj)
+- Try our [Postman Collection](https://documenter.getpostman.com/view/34108325/2sA3kd9GpM) 

@@ -1,0 +1,26 @@
+---
+title: "List Properties"
+api: "GET /tenant/v1/properties"
+description: "Get a list of all properties"
+---
+
+### Headers
+
+<ParamField header="Accept" type="string" required>
+  Must be "application/json"
+</ParamField>
+
+### Query Parameters
+
+<ParamField query="filters[property_name][$contains]" type="string">
+  Filter properties by name (optional)
+</ParamField>
+
+<RequestExample>
+```bash
+curl --request GET \
+  --url '/tenant/v1/properties?filters[property_name][$contains]=محمد' \
+  --header 'Accept: application/json' \
+  --header 'Authorization: Bearer {access_token}'
+```
+</RequestExample> 

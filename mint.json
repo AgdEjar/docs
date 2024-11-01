@@ -25,6 +25,11 @@
     "name": "Postman Collection",
     "url": "https://documenter.getpostman.com/view/34108325/2sA3kd9GpM"
   },
+  "api": {
+    "auth": {
+      "method": "bearer"
+    }
+  },
   "tabs": [
     {
       "name": "API Reference",
@@ -41,14 +46,9 @@
   ],
   "anchors": [
     {
-      "name": "Documentation",
-      "icon": "book-open-cover",
-      "url": "https://agdejar.sa"
-    },
-    {
-      "name": "Community (Coming Soon)",
-      "icon": "slack",
-      "url": "https://agdejar.sa"
+      "name": "Status",
+      "icon": "signal",
+      "url": "https://stats.uptimerobot.com/koyjLJpRaj"
     }
   ],
   "navigation": [
@@ -61,28 +61,90 @@
       ]
     },
     {
-      "group": "Essentials",
+      "group": "API Reference",
       "pages": [
-        "essentials/markdown",
-        "essentials/code",
-        "essentials/images",
-        "essentials/settings",
-        "essentials/navigation",
-        "essentials/reusable-snippets"
+        "api-reference/getting-started",
+        {
+          "group": "Authentication",
+          "pages": [
+            "api-reference/auth/oauth-token",
+            "api-reference/auth/client"
+          ]
+        },
+        {
+          "group": "Properties",
+          "pages": [
+            "api-reference/properties/search-deed",
+            "api-reference/properties/sync-deed",
+            "api-reference/properties/search-deed-remote",
+            "api-reference/properties/list-properties",
+            "api-reference/properties/get-property",
+            "api-reference/properties/update-property",
+            "api-reference/properties/delete-property"
+          ]
+        },
+        {
+          "group": "Units",
+          "pages": [
+            "api-reference/units/list-units",
+            "api-reference/units/get-unit",
+            "api-reference/units/update-unit",
+            "api-reference/units/delete-unit"
+          ]
+        },
+        {
+          "group": "Cities",
+          "pages": [
+            "api-reference/cities/list-cities",
+            "api-reference/cities/get-city"
+          ]
+        },
+        {
+          "group": "Regions",
+          "pages": [
+            "api-reference/regions/list-regions",
+            "api-reference/regions/get-region"
+          ]
+        },
+        {
+          "group": "Parties",
+          "pages": [
+            "api-reference/parties/search-party",
+            "api-reference/parties/update-party",
+            "api-reference/parties/delete-party"
+          ]
+        },
+        {
+          "group": "Contracts",
+          "pages": [
+            "api-reference/contracts/download-pdf",
+            "api-reference/contracts/list-contracts",
+            "api-reference/contracts/create-contract",
+            "api-reference/contracts/update-contract",
+            "api-reference/contracts/delete-contract"
+          ]
+        },
+        "api-reference/api-reference"
       ]
     },
     {
-      "group": "API Documentation",
+      "group": "FAQ",
       "pages": [
-        "api-reference/introduction"
+        "faq/introduction",
+        {
+          "group": "Common Issues",
+          "pages": [
+            "faq/common-issues/authentication",
+            "faq/common-issues/integration",
+            "faq/common-issues/troubleshooting"
+          ]
+        }
       ]
     },
     {
-      "group": "Endpoint Examples",
+      "group": "Changelog",
       "pages": [
-        "api-reference/endpoint/get",
-        "api-reference/endpoint/create",
-        "api-reference/endpoint/delete"
+        "changelog/introduction"
       ]
     }
   ],

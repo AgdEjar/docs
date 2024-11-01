@@ -1,0 +1,26 @@
+---
+title: "Delete Property"
+api: "DELETE /tenant/v1/properties/{id}"
+description: "Delete a property"
+---
+
+### Path Parameters
+
+<ParamField path="id" type="integer" required>
+  The ID of the property to delete
+</ParamField>
+
+### Headers
+
+<ParamField header="Accept" type="string" required>
+  Must be "application/json"
+</ParamField>
+
+<RequestExample>
+```bash
+curl --request DELETE \
+  --url /tenant/v1/properties/1 \
+  --header 'Accept: application/json' \
+  --header 'Authorization: Bearer {access_token}'
+```
+</RequestExample> 

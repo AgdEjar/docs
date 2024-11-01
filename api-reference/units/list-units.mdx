@@ -1,0 +1,26 @@
+---
+title: "List Units"
+api: "GET /tenant/v1/units"
+description: "Get a list of all units"
+---
+
+### Headers
+
+<ParamField header="Accept" type="string" required>
+  Must be "application/json"
+</ParamField>
+
+### Query Parameters
+
+<ParamField query="filters[property][property_name][$contains]" type="string">
+  Filter units by property name (optional)
+</ParamField>
+
+<RequestExample>
+```bash
+curl --request GET \
+  --url '/tenant/v1/units?filters[property][property_name][$contains]=سعيد' \
+  --header 'Accept: application/json' \
+  --header 'Authorization: Bearer {access_token}'
+```
+</RequestExample> 

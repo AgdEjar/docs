@@ -1,0 +1,41 @@
+---
+title: "Update Contract"
+api: "PUT /tenant/v1/contracts/{id}"
+description: "Update contract information"
+---
+
+### Path Parameters
+
+<ParamField path="id" type="integer" required>
+  The ID of the contract to update
+</ParamField>
+
+### Headers
+
+<ParamField header="Accept" type="string" required>
+  Must be "application/json"
+</ParamField>
+
+### Body
+
+<ParamField body="start_date" type="string">
+  Contract start date (YYYY-MM-DD)
+</ParamField>
+
+<ParamField body="end_date" type="string">
+  Contract end date (YYYY-MM-DD)
+</ParamField>
+
+<RequestExample>
+```bash
+curl --request PUT \
+  --url /tenant/v1/contracts/6 \
+  --header 'Accept: application/json' \
+  --header 'Content-Type: application/json' \
+  --header 'Authorization: Bearer {access_token}' \
+  --data '{
+    "start_date": "2024-06-07",
+    "end_date": "2024-06-07"
+  }'
+```
+</RequestExample> 

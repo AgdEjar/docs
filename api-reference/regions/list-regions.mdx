@@ -1,0 +1,26 @@
+---
+title: "List Regions"
+api: "GET /tenant/v1/regions"
+description: "Get a list of all regions"
+---
+
+### Headers
+
+<ParamField header="Accept" type="string" required>
+  Must be "application/json"
+</ParamField>
+
+### Query Parameters
+
+<ParamField query="filters[name][$contains]" type="string">
+  Filter regions by name (optional)
+</ParamField>
+
+<RequestExample>
+```bash
+curl --request GET \
+  --url '/tenant/v1/regions?filters[name][$contains]=ال' \
+  --header 'Accept: application/json' \
+  --header 'Authorization: Bearer {access_token}'
+```
+</RequestExample> 

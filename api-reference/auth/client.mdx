@@ -1,0 +1,26 @@
+---
+title: "Get Client Info"
+api: "GET /tenant/v1/auth/client"
+description: "Get information about the authenticated client"
+---
+
+### Headers
+
+<ParamField header="Accept" type="string" required>
+  Must be "application/json"
+</ParamField>
+
+### Response
+
+<ResponseField name="client" type="object">
+  Client information object
+</ResponseField>
+
+<RequestExample>
+```bash
+curl --request GET \
+  --url /tenant/v1/auth/client \
+  --header 'Accept: application/json' \
+  --header 'Authorization: Bearer {access_token}'
+```
+</RequestExample> 
