@@ -1,0 +1,967 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "API B2B",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://{{base_url}}"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "noauthAuth": {
+        "type": "http",
+        "scheme": "noauth"
+      },
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  },
+  "security": [
+    {
+      "bearerAuth": []
+    }
+  ],
+  "tags": [
+    {
+      "name": "Auth"
+    },
+    {
+      "name": "Properties"
+    },
+    {
+      "name": "Units"
+    },
+    {
+      "name": "Cities"
+    },
+    {
+      "name": "Regions"
+    },
+    {
+      "name": "Parties"
+    },
+    {
+      "name": "Cotracts"
+    }
+  ],
+  "paths": {
+    "/oauth/token": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "oauth/token",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "grant_type": {
+                    "type": "string",
+                    "example": "client_credentials"
+                  },
+                  "client_id": {
+                    "type": "string",
+                    "example": "{{client_id}}"
+                  },
+                  "client_secret": {
+                    "type": "string",
+                    "example": "{{client_secret}}"
+                  },
+                  "scope": {
+                    "type": "string",
+                    "example": "read"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "noauthAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/tenant/v1/auth/client": {
+      "get": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "user",
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/tenant/v1/properties/search-deed": {
+      "post": {
+        "tags": [
+          "Properties"
+        ],
+        "summary": "Find Deed",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "deed_id": 920227005017
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/tenant/v1/properties/sync-deed/{id}": {
+      "post": {
+        "tags": [
+          "Properties"
+        ],
+        "summary": "Sync Deed",
+        "requestBody": {
+          "content": {}
+        },
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true,
+            "example": "2"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/tenant/v1/properties/search-deed/remote": {
+      "post": {
+        "tags": [
+          "Properties"
+        ],
+        "summary": "Find Deed Remote",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": "{\n    \"deed_id\":525416008427,\n    \"owner_id\": \"1061608236\", // Owner id_number nationality id fix it\n    \"date\": \"1404-09-06\" // Hijri TODO fix it\n}"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/tenant/v1/properties": {
+      "get": {
+        "tags": [
+          "Properties"
+        ],
+        "summary": "List All Properties",
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          },
+          {
+            "name": "filters[property_name][$contains]",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "example": "محمد"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/tenant/v1/properties/{documentNumber}": {
+      "get": {
+        "tags": [
+          "Properties"
+        ],
+        "summary": "find Property By Document Number",
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          },
+          {
+            "name": "documentNumber",
+            "in": "path",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true,
+            "example": "525416008427"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/tenant/v1/properties/{id}": {
+      "put": {
+        "tags": [
+          "Properties"
+        ],
+        "summary": "Update Property",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": "{\r\n    \"property_name\": \"Your property name\",\r\n    \"property_number\": \"0\",\r\n    \"document_number\": \"525416008427\",\r\n    \"document_date\": \"1444-05-30\", // Date format YYYY-MM-DD\r\n    \"property_type\": \"building\", // Choose from: building, villa, plaza, shopping_mall, tower, land, other\r\n    \"ownership_document_type\": \"electronic_title_deed\", // Choose from: electronic_title_deed, paper_title_deed, hojjat, other, virtual\r\n    \"property_usage\": \"residential_families\", // Choose from: residential_families, residential_singles, commercial, mixed\r\n    \"property_total_floors\": 5,\r\n    \"property_units_per_floor\": 10,\r\n    \"address_region_id\": 2,\r\n    \"address_city_id\": 57,\r\n    \"address_building_number\": \"1234\",\r\n    \"address_postal_code\": \"12345\",\r\n    \"address_additional_number\": \"1234\",\r\n    \"wakeel_id_number\": \"1016690206\", //رقم الهوية\r\n    \"wakeel_date_of_birth_hijri\": \"\", //تاريخ الميلاد\r\n    \"facilities_parking_spaces\": 0,\r\n    \"facilities_elevators\": 0,\r\n    \"facilities_security_service\": 0,\r\n    \"facilities_transfer_service\": 0,\r\n    \"facilities_cafeteria\": 0,\r\n    \"facilities_laundry\": 0,\r\n    \"facilities_grocery_store\": 0,\r\n    \"facilities_baby_nursery\": 0,\r\n    \"facilities_children_playground\": 0,\r\n    \"facilities_games_room\": 0,\r\n    \"facilities_football_yard\": 0,\r\n    \"facilities_swimming_pool\": 0,\r\n    \"facilities_basketball_court\": 0,\r\n    \"facilities_volleyball_court\": 0,\r\n    \"facilities_banquet_hall\": 0,\r\n    \"facilities_tennis_court\": 0,\r\n    \"facilities_security_entries\": 0,\r\n    \"facilities_gyms_fitness_centers\": 0,\r\n    \"owner_id\": \"1016690206\" // id_number\r\n    /*\"owners\": [\r\n        {\r\n            \"id\": 1,\r\n            \"full_name\": \"سعيد محمد عبدالله القرني\",\r\n            \"id_number\": \"1016690206\",\r\n            \"id_type\": \"national_id\", // Choose from: national_id, resident_id, vip_resident_id, gcc_id, passport, commercial\r\n            \"date_of_birth_hijri\": \"1975-02-14\", // Date format YYYY-MM-DD\r\n            \"party_type\": \"individual\", // Choose from: individual, entity\r\n            \"iban\": \"SA5310000010770556000100\",\r\n            \"phone_number\": \"0569004004\"\r\n        }\r\n       \r\n    ]*/\r\n}"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true,
+            "example": "2"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Properties"
+        ],
+        "summary": "Delete Property",
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true,
+            "example": "1"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/tenant/v1/units": {
+      "get": {
+        "tags": [
+          "Units"
+        ],
+        "summary": "List All Units",
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          },
+          {
+            "name": "filters[property][property_name][$contains]",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "example": "سعيد"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/tenant/v1/units/{unit_id}": {
+      "get": {
+        "tags": [
+          "Units"
+        ],
+        "summary": "find Unit By ID",
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          },
+          {
+            "name": "unit_id",
+            "in": "path",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true,
+            "example": "2"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/tenant/v1/units/{id}": {
+      "put": {
+        "tags": [
+          "Units"
+        ],
+        "summary": "Update Unit",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": "{\r\n  // Unit number is required and must be unique (replace with your unit number)\r\n  \"unit_number\": \"A-0005\",\r\n\r\n  // Floor number is required and must be numeric\r\n  \"floor_number\": 1,\r\n\r\n  // Number of rooms is required, numeric, and minimum 1\r\n  \"rooms\": 1,\r\n\r\n  // Unit usage is required and must be either 'residential_families' or 'residential_singles'\r\n  \"unit_usage\": \"residential_families\",\r\n\r\n  // Unit type is required and must be one of the listed options ['apartment', 'floor', 'villa', 'building', 'tower', 'duplex', 'studio', 'secondary_apartment', 'apartment_extension', 'floor_extension', 'penthouse_villa', 'drivers_room', 'land_lot', 'other']\r\n  \"unit_type\": \"apartment\",\r\n\r\n  // Electricity meter number must be numeric (optional)\r\n  \"utilities_electricity_meter\": null,\r\n\r\n  // Gas meter number must be numeric (optional)\r\n  \"utilities_gas_meter\": null,\r\n\r\n  // Water meter number must be numeric (optional)\r\n  \"utilities_water_meter\": null,\r\n\r\n  // Unit height must be numeric (optional)\r\n  \"dimensions_height\": 0,\r\n\r\n  // Unit length must be numeric (optional)\r\n  \"dimensions_length\": 0,\r\n\r\n  // Unit area must be numeric (optional)\r\n  \"area\": 200,\r\n\r\n  // Unit width must be numeric (optional)\r\n  \"dimensions_width\": 0,\r\n\r\n  // Unit finishing must be one of the listed options [0, 'shell', 'unfinished', 'finished']\r\n  \"unit_finishing\": \"unfinished\",\r\n\r\n  // Unit direction must be one of the listed options [0, 'north', 'east', 'south', 'west']\r\n  \"unit_direction\": \"north\",\r\n\r\n  // Unit furnishing status must be one of the listed options [0, 'furnish_new', 'furnish_used']\r\n  \"is_furnished\": \"furnish_new\",\r\n\r\n  // Number of full bathrooms must be numeric [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]\r\n  \"amenities_bathrooms_full\": 0,\r\n\r\n  // Number of bedrooms must be numeric [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]\r\n  \"amenities_bedrooms\": 3,\r\n\r\n  // Number of split AC units must be numeric (optional) [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]\r\n  \"amenities_split_unit\": 1,\r\n\r\n  // Number of central AC units must be numeric (optional) [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]\r\n  \"amenities_central_ac\": 0,\r\n\r\n  // Number of desert coolers must be numeric (optional) [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]\r\n  \"amenities_desert_cooler\": 0,\r\n\r\n  // Number of halls must be numeric (optional) [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]\r\n  \"amenities_halls\": 1,\r\n\r\n  // Kitchen presence must be numeric (optional) [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]\r\n  \"amenities_kitchen\": 1,\r\n\r\n  // Majles presence must be numeric (optional) [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]\r\n  \"amenities_majles\": 0,\r\n\r\n  // Kitchen sink installation status must be one of the listed options [0, 1] (1 for yes, 0 for no)\r\n  \"amenities_is_kitchen_sink_installed\": 1,\r\n\r\n  // Cabinet installation status must be one of the listed options [0, 1] (1 for yes, 0 for no)\r\n  \"amenities_is_cabinet_installed\": 1,\r\n\r\n  // Maid room presence must be numeric (optional) [0, 1]  (1 for yes, 0 for no)\r\n  \"amenities_maid_room\": 0,\r\n\r\n  // Storeroom presence must be numeric (optional) [0, 1] (1 for yes, 0 for no)\r\n  \"amenities_storeroom\": 0,\r\n\r\n  // Mezzanine inclusion status must be one of the listed options [0, 1] (1 for yes, 0 for no)\r\n  \"include_mezzanine\": 0,\r\n\r\n  // Parking lot inclusion status must be one of the listed options [0, 1] (1 for yes, 0 for no)\r\n  \"include_number_of_parking_lots\": 1,\r\n\r\n  // Backyard presence must be numeric [0, 1] (1 for yes, 0 for no)\r\n  \"amenities_backyard\": 0,\r\n\r\n  // Established date must be in YYYY-MM-DD format (optional)\r\n  \"established_date\": null\r\n}\r\n"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true,
+            "example": "2"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Units"
+        ],
+        "summary": "Delete Unit",
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true,
+            "example": "1"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/tenant/v1/cities": {
+      "get": {
+        "tags": [
+          "Cities"
+        ],
+        "summary": "List All Cities",
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          },
+          {
+            "name": "filters[name_ar][$contains]",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "example": "شقراء"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/tenant/v1/cities/{city_id}": {
+      "get": {
+        "tags": [
+          "Cities"
+        ],
+        "summary": "find City  By ID",
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          },
+          {
+            "name": "city_id",
+            "in": "path",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true,
+            "example": "1"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/tenant/v1/regions": {
+      "get": {
+        "tags": [
+          "Regions"
+        ],
+        "summary": "List All regions",
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          },
+          {
+            "name": "filters[name][$contains]",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "example": "ال"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/tenant/v1/regions/{region_id}": {
+      "get": {
+        "tags": [
+          "Regions"
+        ],
+        "summary": "find region By ID",
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          },
+          {
+            "name": "region_id",
+            "in": "path",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true,
+            "example": "1"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/tenant/v1/parties/search-party": {
+      "get": {
+        "tags": [
+          "Parties"
+        ],
+        "summary": "search-party",
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/tenant/v1/parties/{id}": {
+      "delete": {
+        "tags": [
+          "Parties"
+        ],
+        "summary": "Delete Party",
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true,
+            "example": "1"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Parties"
+        ],
+        "summary": "Update party",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "id_number": "1016690206",
+                  "full_name": "فلان الفلاني تجريبي",
+                  "phone_number": "+966567890317",
+                  "date_of_birth": "1990-01-01",
+                  "date_of_birth_hijri": "1410-05-12",
+                  "region_id": 2,
+                  "city_id": 57,
+                  "district_id": 779,
+                  "building_number": "8888",
+                  "street_name": "Main Street",
+                  "postal_code": "22525",
+                  "additional_number": "6789",
+                  "country_of_issue": "saudi_arabia",
+                  "date_of_issue": "2000-10-10",
+                  "date_of_expiration": "2001-10-12"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true,
+            "example": "1"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/tenant/v1/contracts/download-pdf/{contract_id}": {
+      "get": {
+        "tags": [
+          "Cotracts"
+        ],
+        "summary": "downloadPDF",
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          },
+          {
+            "name": "contract_id",
+            "in": "path",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true,
+            "example": "7"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/tenant/v1/contracts": {
+      "get": {
+        "tags": [
+          "Cotracts"
+        ],
+        "summary": "List All Contracts",
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Cotracts"
+        ],
+        "summary": "Add Contract",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": "{\r\n    // Contract details\r\n    \"duration\": 1, //Type in years \r\n    \"contract_type\": \"residential\", // Type of contract (options: residential, commercial)\r\n    // Parties involved\r\n    \"parties\": [\r\n        {\r\n            \"role\": \"lessor\", // Role of the party (options: lessor, tenant)\r\n            \"id\": 1 // Unique identifier for the party\r\n        },\r\n        {\r\n            \"role\": \"tenant\", // Role of the party (options: lessor, tenant)\r\n            \"id\": 2 // Unique identifier for the party\r\n        }\r\n    ],\r\n    // Unit and property details\r\n    \"unit_id\": \"1945\", // Identifier for the unit\r\n    // Rental fee details\r\n    \"rental_fee\": {\r\n      \r\n        \"total_units_rent\": 10000, // Total rental fee for the contract period\r\n        \"billing_type\": \"monthly\" // Billing type (options: monthly, quarterly, bi-annual, annual, one_time_pay)\r\n    },\r\n    // Financial details\r\n    \"utility_water_meter\": 1, // Flag indicating if utilities are included (options: 0 - No, 1 - Yes),\r\n    \"utility_electricity_meter\": 1, // Flag indicating if utilities are included (options: 0 - No, 1 - Yes),\r\n    \"utility_gas_meter\": 1, // Flag indicating if utilities are included (options: 0 - No, 1 - Yes)\r\n    \"daily_penalty\": 1, //الغرامة اليومية\r\n    \"secure_deposit\": 200, // Security deposit fee\r\n    \"financial\": {\r\n      \r\n        \"retainer_fee\": 0, // Retainer fee\r\n        \"late_fees_charged_fee\": 0, // Late fees charged fee\r\n        \"brokerage_fee\": 0, // Brokerage fee\r\n        \"brokerage_fee_paid_by\": \"tenant\", // Party responsible for paying brokerage fee (options: tenant, owner, both)\r\n        \"brokerage_fee_due_date\": \"2024-06-01\", // Due date for brokerage fee (format: YYYY-MM-DD)\r\n        \"engineering_supervision_fee\": 0, // Engineering supervision fee\r\n        \"unit_finishing_fee\": 0, // Unit finishing fee\r\n        \"waste_removal_fee\": 0 // Waste removal fee\r\n    },\r\n    // Terms and conditions\r\n    \"terms\": {\r\n        \"residential_auto_renewal\": 0, // Flag indicating if the contract auto-renews (options: 0 - No, 1 - Yes)\r\n        \"notice_period_in_days\": 30, // Notice period in days before automatic renewal cancellation\r\n        \"tenant_can_sublease\": 0, // Flag indicating if tenant can sublease (options: 0 - No, 1 - Yes)\r\n        \"residential_followup_with_authorities\": 1, // Flag indicating if follow-up with authorities is required (options: 0 - No, 1 - Yes)\r\n        \"renovations_and_improvements_rental_unit\": 1, // Flag indicating if renovations and improvements are allowed (options: 0 - No, 1 - Yes)\r\n        \"modification_rental_unit\": 0, // Flag indicating if modification of rental unit is allowed (options: 0 - No, 1 - Yes)\r\n        \"governing_law_and_dispute_resolution\": \"real_estate_arbitration\" // Method of dispute resolution (options: real_estate_arbitration, competent_judicial_authority)\r\n    },\r\n    // Custom terms and conditions\r\n    \"custom_terms\": {\r\n        \"body\": \"your_custom_terms_here\", // Custom terms and conditions\r\n        \"ejar_id\": \"ejar_id_here\" // Ejar ID for custom terms\r\n    },\r\n    // Flag indicating if custom terms are enabled (options: 0 - No, 1 - Yes)\r\n    \"custom_terms_on\": 0\r\n}"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/tenant/v1/contracts/{contract_id}": {
+      "delete": {
+        "tags": [
+          "Cotracts"
+        ],
+        "summary": "Delete contract",
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          },
+          {
+            "name": "contract_id",
+            "in": "path",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true,
+            "example": "19"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/tenant/v1/contracts/{id}": {
+      "put": {
+        "tags": [
+          "Cotracts"
+        ],
+        "summary": "Update Contract",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": "{\r\n    // Contract details\r\n    \"start_date\": \"2024-06-07\", //start date\r\n     \"end_date\": \"2024-06-07\" //end date\r\n   \r\n}"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true,
+            "example": "6"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    }
+  }
+}
