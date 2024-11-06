@@ -5,7 +5,7 @@
     "dark": "/logo/logo.png",
     "light": "/logo/AgdEjar-logo.png"
   },
-  "favicon": "/favicon.svg",
+  "favicon": "/logo/logo.png",
   "colors": {
     "primary": "#014536",
     "light": "#07C983",
@@ -18,7 +18,7 @@
   "topbarLinks": [
     {
       "name": "Support",
-      "url": "mailto:md@agd.sa"
+      "url": "mailto:b2b@agd.sa"
     }
   ],
   "topbarCtaButton": {
@@ -34,14 +34,6 @@
     {
       "name": "API Reference",
       "url": "api-reference"
-    },
-    {
-      "name": "FAQ",
-      "url": "faq"
-    },
-    {
-      "name": "Changelog",
-      "url": "changelog"
     }
   ],
   "anchors": [
@@ -126,31 +118,11 @@
         },
         "api-reference/api-reference"
       ]
-    },
-    {
-      "group": "FAQ",
-      "pages": [
-        "faq/introduction",
-        {
-          "group": "Common Issues",
-          "pages": [
-            "faq/common-issues/authentication",
-            "faq/common-issues/integration",
-            "faq/common-issues/troubleshooting"
-          ]
-        }
-      ]
-    },
-    {
-      "group": "Changelog",
-      "pages": [
-        "changelog/introduction"
-      ]
     }
   ],
   "footerSocials": {
-    "x": "https://x.com/mintlify",
-    "github": "https://github.com/mintlify",
-    "linkedin": "https://linkedin.com/company/mintlify"
+    "x": "https://x.com/agdejar",
+    "github": "https://github.com/agdejar",
+    "linkedin": "https://www.linkedin.com/company/agdejar/"
   }
 }

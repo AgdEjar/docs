@@ -1,29 +1,57 @@
 ---
-title: 'Quick Start Guide'
-description: 'Get started with AGD Ejar API integration in minutes'
+title: 'Starting Point'
+description: 'This page will guid you through the process of creating an account with Agd Ejar and integrating with our APIs'
+icon: 'rocket'
 ---
 
-## Before You Begin
+## Before You Start
+In order to use Agd Ejar's APIs, make sure you already have:
+- Commercial registration (CR) issued by ministry of commerce (CR).
+- Your CR included activity code 682010 (Real Estate Brokerage). [read more](https://www.stats.gov.sa/en/isic4/1000?page=460)
+- FAL lisance from REGA. [read more](https://rega.gov.sa/en/electronic-services/fal-real-estate-brokerage)
+- An active account in [Ejar.sa](https://eservices.ejar.sa/en/bo-registration/welcome).
+- An active account with us at Agd Ejar 😊
 
-<Note>
-  To start using AGD Ejar API, you'll need to request an account. Contact us at [md@agd.sa](mailto:md@agd.sa) with:
-  - Your organization name
-  - Business contact information
-  - Intended use case
-  - Expected API call volume
-  
-  Our team will create your account and provide your API credentials within 1-2 business days.
+
+## Enabling ECRS
+To create an account with Agd Ejar, first you need to enable "External Contract Registration Service" (ECRS) for your Ejar's account, to do so please contact us at [b2b@agd.sa](mailto:b2b@agd.sa) with the following information:
+  - Admin's ID number (must be a Saudi & has Nafath access)
+  - Saudi Commercial Registration (PDF)
+  - Saudi Mobile Number
+  - Email
+Then we will send your information to Ejar to to request enabling ECRS for your account.
+<Note> 
+It might takes ~ 3 - 7 business days to enable ECRS for your account by Ejar's team.
 </Note>
+
+
+## ECRS credentials
+Once ECRS is enabled, [login](https://eservices.ejar.sa/en/) into your Ejar account then click on your name in the top right corner and select "Manage Office"
+<img
+  className="block"
+  src="/images/001.png"
+  alt="Manage Office"
+/>
+From the left sidebar, select "External Registration" then click on "Create"
+<img
+  className="block"
+  src="/images/002.png"
+  alt="Create External Registration"
+/>
+
+<Warning> 
+If you didn't see the "External Registration" option, that's mean ECRS is not enabled for your account yet, please contact us at [b2b@agd.sa](mailto:b2b@agd.sa)
+</Warning>
 
 ## Integration Steps
 
-Follow these steps to quickly integrate with AGD Ejar API.
+Follow these steps to quickly integrate with Agd Ejar API.
 
 ### 1. Get Your Credentials
 
 <AccordionGroup>
   <Accordion icon="key" title="Obtain API Credentials">
-    1. Contact our support team at [md@agd.sa](mailto:md@agd.sa)
+    1. Contact our support team at [b2b@agd.sa](mailto:b2b@agd.sa)
     2. Provide your organization details
     3. Receive your `client_id` and `client_secret`
   </Accordion>
@@ -45,7 +73,7 @@ Follow these steps to quickly integrate with AGD Ejar API.
 
 <AccordionGroup>
   <Accordion icon="rocket" title="Try Postman Collection">
-    1. Access our [Postman Collection](https://documenter.getpostman.com/view/34108325/2sA3kd9GpM)
+    1. Access our [Postman Collection](https://documenter.getpostman.com/view/39514920/2sAY4yfMHr)
     2. Import the collection into your Postman
     3. Set up your environment variables
     4. Test different endpoints
@@ -150,7 +178,7 @@ Follow these guidelines for successful integration:
   <Card
     title="Support"
     icon="headset"
-    href="mailto:md@agd.sa"
+    href="mailto:b2b@agd.sa"
   >
     Get help when you need it
   </Card>
