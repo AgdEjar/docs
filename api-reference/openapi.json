@@ -6,7 +6,7 @@
   },
   "servers": [
     {
-      "url": "http://{{base_url}}"
+      "url": "https://{{base_url}}"
     }
   ],
   "components": {
@@ -64,7 +64,7 @@
                 "properties": {
                   "grant_type": {
                     "type": "string",
-                    "example": "client_credentials"
+                    "example": "client_credentials",
                   },
                   "client_id": {
                     "type": "string",
@@ -76,7 +76,7 @@
                   },
                   "scope": {
                     "type": "string",
-                    "example": "read"
+                    "example": "*"
                   }
                 }
               }
@@ -98,7 +98,7 @@
         }
       }
     },
-    "/tenant/v1/auth/client": {
+    "/b2b/v1/auth/client": {
       "get": {
         "tags": [
           "Auth"
@@ -124,7 +124,7 @@
         }
       }
     },
-    "/tenant/v1/properties/search-deed": {
+    "/b2b/v1/properties/search-deed": {
       "post": {
         "tags": [
           "Properties"
@@ -142,16 +142,6 @@
             }
           }
         },
-        "parameters": [
-          {
-            "name": "Accept",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "application/json"
-          }
-        ],
         "responses": {
           "200": {
             "description": "Successful response",
@@ -162,7 +152,7 @@
         }
       }
     },
-    "/tenant/v1/properties/sync-deed/{id}": {
+    "/b2b/v1/properties/sync-deed/{id}": {
       "post": {
         "tags": [
           "Properties"
@@ -200,7 +190,7 @@
         }
       }
     },
-    "/tenant/v1/properties/search-deed/remote": {
+    "/b2b/v1/properties/search-deed/remote": {
       "post": {
         "tags": [
           "Properties"
@@ -216,16 +206,6 @@
             }
           }
         },
-        "parameters": [
-          {
-            "name": "Accept",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "application/json"
-          }
-        ],
         "responses": {
           "200": {
             "description": "Successful response",
@@ -236,7 +216,7 @@
         }
       }
     },
-    "/tenant/v1/properties": {
+    "/b2b/v1/properties": {
       "get": {
         "tags": [
           "Properties"
@@ -270,21 +250,13 @@
         }
       }
     },
-    "/tenant/v1/properties/{documentNumber}": {
+    "/b2b/v1/properties/{documentNumber}": {
       "get": {
         "tags": [
           "Properties"
         ],
         "summary": "find Property By Document Number",
         "parameters": [
-          {
-            "name": "Accept",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "application/json"
-          },
           {
             "name": "documentNumber",
             "in": "path",
@@ -305,7 +277,7 @@
         }
       }
     },
-    "/tenant/v1/properties/{id}": {
+    "/b2b/v1/properties/{id}": {
       "put": {
         "tags": [
           "Properties"
@@ -322,14 +294,6 @@
           }
         },
         "parameters": [
-          {
-            "name": "Accept",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "application/json"
-          },
           {
             "name": "id",
             "in": "path",
@@ -356,14 +320,6 @@
         "summary": "Delete Property",
         "parameters": [
           {
-            "name": "Accept",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "application/json"
-          },
-          {
             "name": "id",
             "in": "path",
             "schema": {
@@ -383,21 +339,13 @@
         }
       }
     },
-    "/tenant/v1/units": {
+    "/b2b/v1/units": {
       "get": {
         "tags": [
           "Units"
         ],
         "summary": "List All Units",
         "parameters": [
-          {
-            "name": "Accept",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "application/json"
-          },
           {
             "name": "filters[property][property_name][$contains]",
             "in": "query",
@@ -417,21 +365,13 @@
         }
       }
     },
-    "/tenant/v1/units/{unit_id}": {
+    "/b2b/v1/units/{unit_id}": {
       "get": {
         "tags": [
           "Units"
         ],
         "summary": "find Unit By ID",
         "parameters": [
-          {
-            "name": "Accept",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "application/json"
-          },
           {
             "name": "unit_id",
             "in": "path",
@@ -452,7 +392,7 @@
         }
       }
     },
-    "/tenant/v1/units/{id}": {
+    "/b2b/v1/units/{id}": {
       "put": {
         "tags": [
           "Units"
@@ -469,14 +409,6 @@
           }
         },
         "parameters": [
-          {
-            "name": "Accept",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "application/json"
-          },
           {
             "name": "id",
             "in": "path",
@@ -503,14 +435,6 @@
         "summary": "Delete Unit",
         "parameters": [
           {
-            "name": "Accept",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "application/json"
-          },
-          {
             "name": "id",
             "in": "path",
             "schema": {
@@ -530,21 +454,13 @@
         }
       }
     },
-    "/tenant/v1/cities": {
+    "/b2b/v1/cities": {
       "get": {
         "tags": [
           "Cities"
         ],
         "summary": "List All Cities",
         "parameters": [
-          {
-            "name": "Accept",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "application/json"
-          },
           {
             "name": "filters[name_ar][$contains]",
             "in": "query",
@@ -564,21 +480,13 @@
         }
       }
     },
-    "/tenant/v1/cities/{city_id}": {
+    "/b2b/v1/cities/{city_id}": {
       "get": {
         "tags": [
           "Cities"
         ],
         "summary": "find City  By ID",
         "parameters": [
-          {
-            "name": "Accept",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "application/json"
-          },
           {
             "name": "city_id",
             "in": "path",
@@ -599,21 +507,13 @@
         }
       }
     },
-    "/tenant/v1/regions": {
+    "/b2b/v1/regions": {
       "get": {
         "tags": [
           "Regions"
         ],
         "summary": "List All regions",
         "parameters": [
-          {
-            "name": "Accept",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "application/json"
-          },
           {
             "name": "filters[name][$contains]",
             "in": "query",
@@ -633,7 +533,7 @@
         }
       }
     },
-    "/tenant/v1/regions/{region_id}": {
+    "/b2b/v1/regions/{region_id}": {
       "get": {
         "tags": [
           "Regions"
@@ -668,7 +568,7 @@
         }
       }
     },
-    "/tenant/v1/parties/search-party": {
+    "/b2b/v1/parties/search-party": {
       "get": {
         "tags": [
           "Parties"
@@ -694,7 +594,7 @@
         }
       }
     },
-    "/tenant/v1/parties/{id}": {
+    "/b2b/v1/parties/{id}": {
       "delete": {
         "tags": [
           "Parties"
@@ -788,7 +688,7 @@
         }
       }
     },
-    "/tenant/v1/contracts/download-pdf/{contract_id}": {
+    "/b2b/v1/contracts/download-pdf/{contract_id}": {
       "get": {
         "tags": [
           "Cotracts"
@@ -823,7 +723,7 @@
         }
       }
     },
-    "/tenant/v1/contracts": {
+    "/b2b/v1/contracts": {
       "get": {
         "tags": [
           "Cotracts"
@@ -858,7 +758,7 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "example": "{\r\n    // Contract details\r\n    \"duration\": 1, //Type in years \r\n    \"contract_type\": \"residential\", // Type of contract (options: residential, commercial)\r\n    // Parties involved\r\n    \"parties\": [\r\n        {\r\n            \"role\": \"lessor\", // Role of the party (options: lessor, tenant)\r\n            \"id\": 1 // Unique identifier for the party\r\n        },\r\n        {\r\n            \"role\": \"tenant\", // Role of the party (options: lessor, tenant)\r\n            \"id\": 2 // Unique identifier for the party\r\n        }\r\n    ],\r\n    // Unit and property details\r\n    \"unit_id\": \"1945\", // Identifier for the unit\r\n    // Rental fee details\r\n    \"rental_fee\": {\r\n      \r\n        \"total_units_rent\": 10000, // Total rental fee for the contract period\r\n        \"billing_type\": \"monthly\" // Billing type (options: monthly, quarterly, bi-annual, annual, one_time_pay)\r\n    },\r\n    // Financial details\r\n    \"utility_water_meter\": 1, // Flag indicating if utilities are included (options: 0 - No, 1 - Yes),\r\n    \"utility_electricity_meter\": 1, // Flag indicating if utilities are included (options: 0 - No, 1 - Yes),\r\n    \"utility_gas_meter\": 1, // Flag indicating if utilities are included (options: 0 - No, 1 - Yes)\r\n    \"daily_penalty\": 1, //الغرامة اليومية\r\n    \"secure_deposit\": 200, // Security deposit fee\r\n    \"financial\": {\r\n      \r\n        \"retainer_fee\": 0, // Retainer fee\r\n        \"late_fees_charged_fee\": 0, // Late fees charged fee\r\n        \"brokerage_fee\": 0, // Brokerage fee\r\n        \"brokerage_fee_paid_by\": \"tenant\", // Party responsible for paying brokerage fee (options: tenant, owner, both)\r\n        \"brokerage_fee_due_date\": \"2024-06-01\", // Due date for brokerage fee (format: YYYY-MM-DD)\r\n        \"engineering_supervision_fee\": 0, // Engineering supervision fee\r\n        \"unit_finishing_fee\": 0, // Unit finishing fee\r\n        \"waste_removal_fee\": 0 // Waste removal fee\r\n    },\r\n    // Terms and conditions\r\n    \"terms\": {\r\n        \"residential_auto_renewal\": 0, // Flag indicating if the contract auto-renews (options: 0 - No, 1 - Yes)\r\n        \"notice_period_in_days\": 30, // Notice period in days before automatic renewal cancellation\r\n        \"tenant_can_sublease\": 0, // Flag indicating if tenant can sublease (options: 0 - No, 1 - Yes)\r\n        \"residential_followup_with_authorities\": 1, // Flag indicating if follow-up with authorities is required (options: 0 - No, 1 - Yes)\r\n        \"renovations_and_improvements_rental_unit\": 1, // Flag indicating if renovations and improvements are allowed (options: 0 - No, 1 - Yes)\r\n        \"modification_rental_unit\": 0, // Flag indicating if modification of rental unit is allowed (options: 0 - No, 1 - Yes)\r\n        \"governing_law_and_dispute_resolution\": \"real_estate_arbitration\" // Method of dispute resolution (options: real_estate_arbitration, competent_judicial_authority)\r\n    },\r\n    // Custom terms and conditions\r\n    \"custom_terms\": {\r\n        \"body\": \"your_custom_terms_here\", // Custom terms and conditions\r\n        \"ejar_id\": \"ejar_id_here\" // Ejar ID for custom terms\r\n    },\r\n    // Flag indicating if custom terms are enabled (options: 0 - No, 1 - Yes)\r\n    \"custom_terms_on\": 0\r\n}"
+                "example": "{\r\n    // Contract details\r\n    \"duration\": 1, //Type in years \r\n    \"contract_type\": \"residential\", // Type of contract (options: residential, commercial)\r\n    // Parties involved\r\n    \"parties\": [\r\n        {\r\n            \"role\": \"lessor\", // Role of the party (options: lessor, b2b)\r\n            \"id\": 1 // Unique identifier for the party\r\n        },\r\n        {\r\n            \"role\": \"b2b\", // Role of the party (options: lessor, b2b)\r\n            \"id\": 2 // Unique identifier for the party\r\n        }\r\n    ],\r\n    // Unit and property details\r\n    \"unit_id\": \"1945\", // Identifier for the unit\r\n    // Rental fee details\r\n    \"rental_fee\": {\r\n      \r\n        \"total_units_rent\": 10000, // Total rental fee for the contract period\r\n        \"billing_type\": \"monthly\" // Billing type (options: monthly, quarterly, bi-annual, annual, one_time_pay)\r\n    },\r\n    // Financial details\r\n    \"utility_water_meter\": 1, // Flag indicating if utilities are included (options: 0 - No, 1 - Yes),\r\n    \"utility_electricity_meter\": 1, // Flag indicating if utilities are included (options: 0 - No, 1 - Yes),\r\n    \"utility_gas_meter\": 1, // Flag indicating if utilities are included (options: 0 - No, 1 - Yes)\r\n    \"daily_penalty\": 1, //الغرامة اليومية\r\n    \"secure_deposit\": 200, // Security deposit fee\r\n    \"financial\": {\r\n      \r\n        \"retainer_fee\": 0, // Retainer fee\r\n        \"late_fees_charged_fee\": 0, // Late fees charged fee\r\n        \"brokerage_fee\": 0, // Brokerage fee\r\n        \"brokerage_fee_paid_by\": \"b2b\", // Party responsible for paying brokerage fee (options: b2b, owner, both)\r\n        \"brokerage_fee_due_date\": \"2024-06-01\", // Due date for brokerage fee (format: YYYY-MM-DD)\r\n        \"engineering_supervision_fee\": 0, // Engineering supervision fee\r\n        \"unit_finishing_fee\": 0, // Unit finishing fee\r\n        \"waste_removal_fee\": 0 // Waste removal fee\r\n    },\r\n    // Terms and conditions\r\n    \"terms\": {\r\n        \"residential_auto_renewal\": 0, // Flag indicating if the contract auto-renews (options: 0 - No, 1 - Yes)\r\n        \"notice_period_in_days\": 30, // Notice period in days before automatic renewal cancellation\r\n        \"b2b_can_sublease\": 0, // Flag indicating if b2b can sublease (options: 0 - No, 1 - Yes)\r\n        \"residential_followup_with_authorities\": 1, // Flag indicating if follow-up with authorities is required (options: 0 - No, 1 - Yes)\r\n        \"renovations_and_improvements_rental_unit\": 1, // Flag indicating if renovations and improvements are allowed (options: 0 - No, 1 - Yes)\r\n        \"modification_rental_unit\": 0, // Flag indicating if modification of rental unit is allowed (options: 0 - No, 1 - Yes)\r\n        \"governing_law_and_dispute_resolution\": \"real_estate_arbitration\" // Method of dispute resolution (options: real_estate_arbitration, competent_judicial_authority)\r\n    },\r\n    // Custom terms and conditions\r\n    \"custom_terms\": {\r\n        \"body\": \"your_custom_terms_here\", // Custom terms and conditions\r\n        \"ejar_id\": \"ejar_id_here\" // Ejar ID for custom terms\r\n    },\r\n    // Flag indicating if custom terms are enabled (options: 0 - No, 1 - Yes)\r\n    \"custom_terms_on\": 0\r\n}"
               }
             }
           }
@@ -883,7 +783,7 @@
         }
       }
     },
-    "/tenant/v1/contracts/{contract_id}": {
+    "/b2b/v1/contracts/{contract_id}": {
       "delete": {
         "tags": [
           "Cotracts"
@@ -918,7 +818,7 @@
         }
       }
     },
-    "/tenant/v1/contracts/{id}": {
+    "/b2b/v1/contracts/{id}": {
       "put": {
         "tags": [
           "Cotracts"

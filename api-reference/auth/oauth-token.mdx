@@ -19,7 +19,7 @@ description: "Get an OAuth token for authentication"
 </ParamField>
 
 <ParamField body="scope" type="string" required>
-  The scope of access requested. Use "read".
+  The scope of access requested. Use "*".
 </ParamField>
 
 ### Response
@@ -44,7 +44,7 @@ curl --request POST \
   --form 'grant_type=client_credentials' \
   --form 'client_id={{client_id}}' \
   --form 'client_secret={{client_secret}}' \
-  --form 'scope=read'
+  --form 'scope=*'
 ```
 </RequestExample>
 
