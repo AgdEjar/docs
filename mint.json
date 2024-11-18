@@ -30,12 +30,6 @@
       "method": "bearer"
     }
   },
-  "tabs": [
-    {
-      "name": "API Reference",
-      "url": "api-reference"
-    }
-  ],
   "anchors": [
     {
       "name": "Status",
@@ -45,7 +39,7 @@
   ],
   "navigation": [
     {
-      "group": "Get Started",
+      "group": " ",
       "pages": [
         "introduction",
         "quickstart",
