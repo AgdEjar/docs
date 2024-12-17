@@ -6,7 +6,7 @@
   },
   "servers": [
     {
-      "url": "https://{{base_url}}"
+      "url": "http://{{base_url}}"
     }
   ],
   "components": {
@@ -47,6 +47,36 @@
     },
     {
       "name": "Cotracts"
+    },
+    {
+      "name": "Cotracts > Actions"
+    },
+    {
+      "name": "Cotracts > Payments"
+    },
+    {
+      "name": "Order Steps"
+    },
+    {
+      "name": "Order Steps > Step 1"
+    },
+    {
+      "name": "Order Steps > Step 2"
+    },
+    {
+      "name": "Order Steps > Step 3"
+    },
+    {
+      "name": "Order Steps > Step 4"
+    },
+    {
+      "name": "Order Steps > Step 5"
+    },
+    {
+      "name": "Order Steps > Step 6"
+    },
+    {
+      "name": "Order Steps > Step 7"
     }
   ],
   "paths": {
@@ -55,7 +85,7 @@
         "tags": [
           "Auth"
         ],
-        "summary": "oauth/token",
+        "summary": "Authentication",
         "requestBody": {
           "content": {
             "multipart/form-data": {
@@ -64,7 +94,7 @@
                 "properties": {
                   "grant_type": {
                     "type": "string",
-                    "example": "client_credentials",
+                    "example": "client_credentials"
                   },
                   "client_id": {
                     "type": "string",
@@ -103,17 +133,7 @@
         "tags": [
           "Auth"
         ],
-        "summary": "user",
-        "parameters": [
-          {
-            "name": "Accept",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "application/json"
-          }
-        ],
+        "summary": "Client",
         "responses": {
           "200": {
             "description": "Successful response",
@@ -152,7 +172,7 @@
         }
       }
     },
-    "/b2b/v1/properties/sync-deed/{id}": {
+    "/b2b/v1/properties/sync-deed/{property_id}": {
       "post": {
         "tags": [
           "Properties"
@@ -163,21 +183,13 @@
         },
         "parameters": [
           {
-            "name": "Accept",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "application/json"
-          },
-          {
-            "name": "id",
+            "name": "property_id",
             "in": "path",
             "schema": {
               "type": "integer"
             },
             "required": true,
-            "example": "2"
+            "example": "17"
           }
         ],
         "responses": {
@@ -201,7 +213,7 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "example": "{\n    \"deed_id\":525416008427,\n    \"owner_id\": \"1061608236\", // Owner id_number nationality id fix it\n    \"date\": \"1404-09-06\" // Hijri TODO fix it\n}"
+                "example": "{\n    \"deed_id\": 525416008427,\n    \"owner_id\": \"1061608236\", // Owner id_number nationality id fix it\n    \"date\": \"1404-09-06\" // Hijri TODO fix it\n}"
               }
             }
           }
@@ -222,24 +234,6 @@
           "Properties"
         ],
         "summary": "List All Properties",
-        "parameters": [
-          {
-            "name": "Accept",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "application/json"
-          },
-          {
-            "name": "filters[property_name][$contains]",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            },
-            "example": "محمد"
-          }
-        ],
         "responses": {
           "200": {
             "description": "Successful response",
@@ -255,7 +249,7 @@
         "tags": [
           "Properties"
         ],
-        "summary": "find Property By Document Number",
+        "summary": "Find Property By Document Number",
         "parameters": [
           {
             "name": "documentNumber",
@@ -277,7 +271,7 @@
         }
       }
     },
-    "/b2b/v1/properties/{id}": {
+    "/tenant/v1/properties/{id}": {
       "put": {
         "tags": [
           "Properties"
@@ -288,7 +282,7 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "example": "{\r\n    \"property_name\": \"Your property name\",\r\n    \"property_number\": \"0\",\r\n    \"document_number\": \"525416008427\",\r\n    \"document_date\": \"1444-05-30\", // Date format YYYY-MM-DD\r\n    \"property_type\": \"building\", // Choose from: building, villa, plaza, shopping_mall, tower, land, other\r\n    \"ownership_document_type\": \"electronic_title_deed\", // Choose from: electronic_title_deed, paper_title_deed, hojjat, other, virtual\r\n    \"property_usage\": \"residential_families\", // Choose from: residential_families, residential_singles, commercial, mixed\r\n    \"property_total_floors\": 5,\r\n    \"property_units_per_floor\": 10,\r\n    \"address_region_id\": 2,\r\n    \"address_city_id\": 57,\r\n    \"address_building_number\": \"1234\",\r\n    \"address_postal_code\": \"12345\",\r\n    \"address_additional_number\": \"1234\",\r\n    \"wakeel_id_number\": \"1016690206\", //رقم الهوية\r\n    \"wakeel_date_of_birth_hijri\": \"\", //تاريخ الميلاد\r\n    \"facilities_parking_spaces\": 0,\r\n    \"facilities_elevators\": 0,\r\n    \"facilities_security_service\": 0,\r\n    \"facilities_transfer_service\": 0,\r\n    \"facilities_cafeteria\": 0,\r\n    \"facilities_laundry\": 0,\r\n    \"facilities_grocery_store\": 0,\r\n    \"facilities_baby_nursery\": 0,\r\n    \"facilities_children_playground\": 0,\r\n    \"facilities_games_room\": 0,\r\n    \"facilities_football_yard\": 0,\r\n    \"facilities_swimming_pool\": 0,\r\n    \"facilities_basketball_court\": 0,\r\n    \"facilities_volleyball_court\": 0,\r\n    \"facilities_banquet_hall\": 0,\r\n    \"facilities_tennis_court\": 0,\r\n    \"facilities_security_entries\": 0,\r\n    \"facilities_gyms_fitness_centers\": 0,\r\n    \"owner_id\": \"1016690206\" // id_number\r\n    /*\"owners\": [\r\n        {\r\n            \"id\": 1,\r\n            \"full_name\": \"سعيد محمد عبدالله القرني\",\r\n            \"id_number\": \"1016690206\",\r\n            \"id_type\": \"national_id\", // Choose from: national_id, resident_id, vip_resident_id, gcc_id, passport, commercial\r\n            \"date_of_birth_hijri\": \"1975-02-14\", // Date format YYYY-MM-DD\r\n            \"party_type\": \"individual\", // Choose from: individual, entity\r\n            \"iban\": \"SA5310000010770556000100\",\r\n            \"phone_number\": \"0569004004\"\r\n        }\r\n       \r\n    ]*/\r\n}"
+                "example": "{\r\n    \"property_name\": \"Your property name\",\r\n    \"property_number\": \"0\",\r\n    \"document_number\": \"525416008427\",\r\n    \"document_date\": \"1444-05-30\", // Date format YYYY-MM-DD\r\n    \"property_type\": \"building\", // Choose from: building, villa, plaza, shopping_mall, tower, land, other\r\n    \"ownership_document_type\": \"electronic_title_deed\", // Choose from: electronic_title_deed, paper_title_deed, hojjat, other, virtual\r\n    \"property_usage\": \"residential_families\", // Choose from: residential_families, residential_singles, commercial, mixed\r\n    \"property_total_floors\": 5,\r\n    \"property_units_per_floor\": 10,\r\n    \"address_region_id\": 2,\r\n    \"address_city_id\": 57,\r\n    \"address_building_number\": \"1234\",\r\n    \"address_postal_code\": \"12345\",\r\n    \"address_additional_number\": \"1234\",\r\n    \"wakeel_id_number\": \"1016690206\", //رقم الهوية\r\n    \"wakeel_date_of_birth_hijri\": \"\", //تاريخ الميلاد\r\n    \"facilities_parking_spaces\": 0,\r\n    \"facilities_elevators\": 0,\r\n    \"facilities_security_service\": 0,\r\n    \"facilities_transfer_service\": 0,\r\n    \"facilities_cafeteria\": 0,\r\n    \"facilities_laundry\": 0,\r\n    \"facilities_grocery_store\": 0,\r\n    \"facilities_baby_nursery\": 0,\r\n    \"facilities_children_playground\": 0,\r\n    \"facilities_games_room\": 0,\r\n    \"facilities_football_yard\": 0,\r\n    \"facilities_swimming_pool\": 0,\r\n    \"facilities_basketball_court\": 0,\r\n    \"facilities_volleyball_court\": 0,\r\n    \"facilities_banquet_hall\": 0,\r\n    \"facilities_tennis_court\": 0,\r\n    \"facilities_security_entries\": 0,\r\n    \"facilities_gyms_fitness_centers\": 0,\r\n    \"owner_id\": \"1016690206\" // id_number\r\n}"
               }
             }
           }
@@ -347,12 +341,20 @@
         "summary": "List All Units",
         "parameters": [
           {
-            "name": "filters[property][property_name][$contains]",
+            "name": "filters[agreement_status][$eq]",
             "in": "query",
             "schema": {
               "type": "string"
             },
-            "example": "سعيد"
+            "example": "no_agreement"
+          },
+          {
+            "name": "filters[availability][$eq]",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "example": "available"
           }
         ],
         "responses": {
@@ -365,12 +367,39 @@
         }
       }
     },
-    "/b2b/v1/units/{unit_id}": {
+    "/b2b/v1/units/property/{property_id}": {
       "get": {
         "tags": [
           "Units"
         ],
-        "summary": "find Unit By ID",
+        "summary": "List By Property",
+        "parameters": [
+          {
+            "name": "property_id",
+            "in": "path",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true,
+            "example": "17"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/tenant/v1/units/{unit_id}": {
+      "get": {
+        "tags": [
+          "Units"
+        ],
+        "summary": "Find Unit By ID",
         "parameters": [
           {
             "name": "unit_id",
@@ -462,12 +491,12 @@
         "summary": "List All Cities",
         "parameters": [
           {
-            "name": "filters[name_ar][$contains]",
+            "name": "filters[region_id][$contains]",
             "in": "query",
             "schema": {
-              "type": "string"
+              "type": "integer"
             },
-            "example": "شقراء"
+            "example": "2"
           }
         ],
         "responses": {
@@ -485,7 +514,7 @@
         "tags": [
           "Cities"
         ],
-        "summary": "find City  By ID",
+        "summary": "Find City By ID",
         "parameters": [
           {
             "name": "city_id",
@@ -538,16 +567,8 @@
         "tags": [
           "Regions"
         ],
-        "summary": "find region By ID",
+        "summary": "Find Region By ID",
         "parameters": [
-          {
-            "name": "Accept",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "application/json"
-          },
           {
             "name": "region_id",
             "in": "path",
@@ -573,17 +594,7 @@
         "tags": [
           "Parties"
         ],
-        "summary": "search-party",
-        "parameters": [
-          {
-            "name": "Accept",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "application/json"
-          }
-        ],
+        "summary": "Search Party",
         "responses": {
           "200": {
             "description": "Successful response",
@@ -601,14 +612,6 @@
         ],
         "summary": "Delete Party",
         "parameters": [
-          {
-            "name": "Accept",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "application/json"
-          },
           {
             "name": "id",
             "in": "path",
@@ -661,14 +664,6 @@
         },
         "parameters": [
           {
-            "name": "Accept",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "application/json"
-          },
-          {
             "name": "id",
             "in": "path",
             "schema": {
@@ -693,7 +688,104 @@
         "tags": [
           "Cotracts"
         ],
-        "summary": "downloadPDF",
+        "summary": "Download PDF",
+        "parameters": [
+          {
+            "name": "contract_id",
+            "in": "path",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true,
+            "example": "19"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/b2b/v1/contracts/order-actions/{contract_id}/sync": {
+      "post": {
+        "tags": [
+          "Cotracts > Actions"
+        ],
+        "summary": "Sync Contract",
+        "requestBody": {
+          "content": {}
+        },
+        "parameters": [
+          {
+            "name": "contract_id",
+            "in": "path",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true,
+            "example": "6199"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/b2b/v1/contracts/order-actions/{contract_id}/clone": {
+      "post": {
+        "tags": [
+          "Cotracts > Actions"
+        ],
+        "summary": "Clone Contract",
+        "requestBody": {
+          "content": {}
+        },
+        "parameters": [
+          {
+            "name": "contract_id",
+            "in": "path",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true,
+            "example": "6199"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/b2b/v1/contracts/order-actions/{contract_id}/status": {
+      "put": {
+        "tags": [
+          "Cotracts > Actions"
+        ],
+        "summary": "Change Contract Status",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": "{\r\n    \"status\":\"draft\" //draft,deleted\r\n}"
+              }
+            }
+          }
+        },
         "parameters": [
           {
             "name": "Accept",
@@ -710,7 +802,329 @@
               "type": "integer"
             },
             "required": true,
-            "example": "7"
+            "example": "6199"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/b2b/v1/contracts/order-actions/{contract_id}/pay-with-wallet": {
+      "put": {
+        "tags": [
+          "Cotracts > Actions"
+        ],
+        "summary": "Pay Contract With Wallet",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": "{\r\n    \"amount\":\"1\"//max =$payment->bo_office_net - $payment->saas_with_vat - $payment->bo_deductions_discount\r\n}"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          },
+          {
+            "name": "contract_id",
+            "in": "path",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true,
+            "example": "6199"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/b2b/v1/contracts/order-actions/{contract_id}/re-submit-contract": {
+      "post": {
+        "tags": [
+          "Cotracts > Actions"
+        ],
+        "summary": "Re Submit Contract",
+        "requestBody": {
+          "content": {}
+        },
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          },
+          {
+            "name": "contract_id",
+            "in": "path",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true,
+            "example": "6199"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/b2b/v1/contracts/order-actions/{contract_id}/send-contract-review-link": {
+      "post": {
+        "tags": [
+          "Cotracts > Actions"
+        ],
+        "summary": "Send Contract Review Link",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": "{\r\n    \r\n    \"recipient\":\"owner\"//owner,tenant\r\n   \r\n}"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          },
+          {
+            "name": "contract_id",
+            "in": "path",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true,
+            "example": "6199"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/b2b/v1/contracts/order-actions/{contract_id}/open-contract-link-live": {
+      "get": {
+        "tags": [
+          "Cotracts > Actions"
+        ],
+        "summary": "Open Contract Link Live",
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          },
+          {
+            "name": "contract_id",
+            "in": "path",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true,
+            "example": "6199"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/b2b/v1/contracts/order-actions/{contract_id}/tax-invoice-contract": {
+      "get": {
+        "tags": [
+          "Cotracts > Actions"
+        ],
+        "summary": "Tax Invoice Contract",
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          },
+          {
+            "name": "contract_id",
+            "in": "path",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true,
+            "example": "6199"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/b2b/v1/payments": {
+      "get": {
+        "tags": [
+          "Cotracts > Payments"
+        ],
+        "summary": "List All Payments",
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            },
+            "example": "1"
+          },
+          {
+            "name": "per_page",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            },
+            "example": "10"
+          },
+          {
+            "name": "collection_status",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "//not_collected,collected"
+          },
+          {
+            "name": "order_status",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "//paid,pending"
+          },
+          {
+            "name": "contract_number",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "party_info",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/b2b/v1/{contract_id}/installments": {
+      "get": {
+        "tags": [
+          "Cotracts > Payments"
+        ],
+        "summary": "Contract Installments",
+        "parameters": [
+          {
+            "name": "contract_id",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/b2b/v1/{contract_id}/invoices": {
+      "get": {
+        "tags": [
+          "Cotracts > Payments"
+        ],
+        "summary": "Contract Invoices",
+        "parameters": [
+          {
+            "name": "contract_id",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
           }
         ],
         "responses": {
@@ -758,7 +1172,7 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "example": "{\r\n    // Contract details\r\n    \"duration\": 1, //Type in years \r\n    \"contract_type\": \"residential\", // Type of contract (options: residential, commercial)\r\n    // Parties involved\r\n    \"parties\": [\r\n        {\r\n            \"role\": \"lessor\", // Role of the party (options: lessor, b2b)\r\n            \"id\": 1 // Unique identifier for the party\r\n        },\r\n        {\r\n            \"role\": \"b2b\", // Role of the party (options: lessor, b2b)\r\n            \"id\": 2 // Unique identifier for the party\r\n        }\r\n    ],\r\n    // Unit and property details\r\n    \"unit_id\": \"1945\", // Identifier for the unit\r\n    // Rental fee details\r\n    \"rental_fee\": {\r\n      \r\n        \"total_units_rent\": 10000, // Total rental fee for the contract period\r\n        \"billing_type\": \"monthly\" // Billing type (options: monthly, quarterly, bi-annual, annual, one_time_pay)\r\n    },\r\n    // Financial details\r\n    \"utility_water_meter\": 1, // Flag indicating if utilities are included (options: 0 - No, 1 - Yes),\r\n    \"utility_electricity_meter\": 1, // Flag indicating if utilities are included (options: 0 - No, 1 - Yes),\r\n    \"utility_gas_meter\": 1, // Flag indicating if utilities are included (options: 0 - No, 1 - Yes)\r\n    \"daily_penalty\": 1, //الغرامة اليومية\r\n    \"secure_deposit\": 200, // Security deposit fee\r\n    \"financial\": {\r\n      \r\n        \"retainer_fee\": 0, // Retainer fee\r\n        \"late_fees_charged_fee\": 0, // Late fees charged fee\r\n        \"brokerage_fee\": 0, // Brokerage fee\r\n        \"brokerage_fee_paid_by\": \"b2b\", // Party responsible for paying brokerage fee (options: b2b, owner, both)\r\n        \"brokerage_fee_due_date\": \"2024-06-01\", // Due date for brokerage fee (format: YYYY-MM-DD)\r\n        \"engineering_supervision_fee\": 0, // Engineering supervision fee\r\n        \"unit_finishing_fee\": 0, // Unit finishing fee\r\n        \"waste_removal_fee\": 0 // Waste removal fee\r\n    },\r\n    // Terms and conditions\r\n    \"terms\": {\r\n        \"residential_auto_renewal\": 0, // Flag indicating if the contract auto-renews (options: 0 - No, 1 - Yes)\r\n        \"notice_period_in_days\": 30, // Notice period in days before automatic renewal cancellation\r\n        \"b2b_can_sublease\": 0, // Flag indicating if b2b can sublease (options: 0 - No, 1 - Yes)\r\n        \"residential_followup_with_authorities\": 1, // Flag indicating if follow-up with authorities is required (options: 0 - No, 1 - Yes)\r\n        \"renovations_and_improvements_rental_unit\": 1, // Flag indicating if renovations and improvements are allowed (options: 0 - No, 1 - Yes)\r\n        \"modification_rental_unit\": 0, // Flag indicating if modification of rental unit is allowed (options: 0 - No, 1 - Yes)\r\n        \"governing_law_and_dispute_resolution\": \"real_estate_arbitration\" // Method of dispute resolution (options: real_estate_arbitration, competent_judicial_authority)\r\n    },\r\n    // Custom terms and conditions\r\n    \"custom_terms\": {\r\n        \"body\": \"your_custom_terms_here\", // Custom terms and conditions\r\n        \"ejar_id\": \"ejar_id_here\" // Ejar ID for custom terms\r\n    },\r\n    // Flag indicating if custom terms are enabled (options: 0 - No, 1 - Yes)\r\n    \"custom_terms_on\": 0\r\n}"
+                "example": "{\r\n    // Contract details\r\n    \"duration\": 2, //Type in years \r\n    \"duration_type\": \"year\",\r\n    \"contract_type\": \"residential\", // Type of contract (options: residential, commercial)\r\n    // Parties involved\r\n    \"parties\": [\r\n        {\r\n            \"role\": \"tenant\", // Role of the party (options:  tenant)\r\n            \"id\": 1 // Unique identifier for the party\r\n        }\r\n    ],\r\n    // Unit and property details\r\n    \"unit_id\": \"93\", // Identifier for the unit\r\n    \"data_financial\": {\r\n        \"total_units_rent\": \"10000\",\r\n        \"total_paid_rent\": null,\r\n        \"total_paid_services\": null,\r\n        \"rent_type\": \"for_all_units\",\r\n        \"billing_type\": \"monthly\", // Billing type (options: monthly, quarterly, bi-annual, annual, one_time_pay)\r\n        \"extra_options\": 1,\r\n        \"security_deposit_required\": 1,\r\n        \"security_deposit_fee\": 125,\r\n        \"late_fees_charged_required\": 1,\r\n        \"late_fees_charged_fee\": 0,\r\n        \"retainer_required\": 0,\r\n        \"retainer_fee\": 0,\r\n        \"brokerage_required\": 0,\r\n        \"brokerage_fee\": 0,\r\n        \"brokerage_fee_paid_by\": \"owner\",//'tenant', 'owner', 'both'\r\n        \"brokerage_fee_due_date\": \"2024-06-01\",\r\n        \"engineering_supervision_required\": 0,\r\n        \"engineering_supervision_fee\": \"0\",\r\n        \"unit_finishing_required\": 0,\r\n        \"unit_finishing_fee\": \"0\",\r\n        \"waste_removal_required\": 0,\r\n        \"waste_removal_fee\": \"0\",\r\n        \"iban_number\": \"SA3505000068200288467002\",\r\n        \"utilities_on\": 1,\r\n        \"electricity_meter\": \"1\",\r\n        \"electricity_reading\": null,\r\n        \"electricity_amount\": null,\r\n        \"electricity_method\": \"metered_fee\",\r\n        \"water_meter\": \"1\",\r\n        \"water_reading\": null,\r\n        \"water_amount\": null,\r\n        \"water_method\": \"metered_fee\",\r\n        \"gas_meter\": \"1\",\r\n        \"gas_reading\": null,\r\n        \"gas_amount\": null,\r\n        \"gas_method\": \"metered_fee\",\r\n        \"commercial_services_fees_required\": false,\r\n        \"commercial_services_fees\": null,\r\n        \"dynamic_rent_required\": false,\r\n        \"dynamic_rent\": null,\r\n        \"utilities_and_services_required\": false,\r\n        \"parking_amount\": null,\r\n        \"parking_method\": \"false\",\r\n        \"created_at\": \"2024-12-10T16:08:03.000000Z\",\r\n        \"updated_at\": \"2024-12-10T16:08:05.000000Z\",\r\n        \"commercial_services_fees_data\": {\r\n            \"sewage_fees\": {\r\n                \"amount\": 0,\r\n                \"currency\": \"sar\"\r\n            },\r\n            \"maintenance\": {\r\n                \"amount\": 0,\r\n                \"currency\": \"sar\"\r\n            },\r\n            \"cleaning_services\": {\r\n                \"amount\": 0,\r\n                \"currency\": \"sar\"\r\n            },\r\n            \"security\": {\r\n                \"amount\": 0,\r\n                \"currency\": \"sar\"\r\n            }\r\n        },\r\n        \"dynamic_rent_data\": {\r\n            \"dynamic_rent_type\": \"percentage\",\r\n            \"dynamic_rent_growth\": \"increasing\",\r\n            \"percentages\": []\r\n        }\r\n    },\r\n    \"data_terms\": {\r\n        \"type\": \"contract_terms\",\r\n        \"attributes\": {\r\n            \"term_type\": \"residential\",\r\n            \"ejar_fees_paid_by\": \"brokerage_office\"\r\n        },\r\n        \"relationships\": {\r\n            \"contract_term_answers\": {\r\n                \"data\": [\r\n                    {\r\n                        \"type\": \"contract_term_answers\",\r\n                        \"attributes\": {\r\n                            \"term_template_id\": 36,\r\n                            \"term_template_key\": \"tenant_can_sublease\",\r\n                            \"enabled\": true\r\n                        }\r\n                    },\r\n                    {\r\n                        \"type\": \"contract_term_answers\",\r\n                        \"attributes\": {\r\n                            \"term_template_id\": 39,\r\n                            \"term_template_key\": \"residential_followup_with_authorities\",\r\n                            \"enabled\": true\r\n                        }\r\n                    },\r\n                    {\r\n                        \"type\": \"contract_term_answers\",\r\n                        \"attributes\": {\r\n                            \"term_template_id\": 40,\r\n                            \"term_template_key\": \"renovations_and_improvements_rental_unit\",\r\n                            \"enabled\": true\r\n                        }\r\n                    },\r\n                    {\r\n                        \"type\": \"contract_term_answers\",\r\n                        \"attributes\": {\r\n                            \"term_template_id\": 41,\r\n                            \"term_template_key\": \"modification_rental_unit\",\r\n                            \"enabled\": true\r\n                        }\r\n                    },\r\n                    {\r\n                        \"type\": \"contract_term_answers\",\r\n                        \"attributes\": {\r\n                            \"term_template_id\": 42,\r\n                            \"term_template_key\": \"governing_law_and_dispute_resolution\",\r\n                            \"enabled\": true,\r\n                            \"answers\": {\r\n                                \"governing_law_and_dispute_resolution_option\": \"real_estate_arbitration\"\r\n                            }\r\n                        }\r\n                    },\r\n                    {\r\n                        \"type\": \"contract_term_answers\",\r\n                        \"attributes\": {\r\n                            \"term_template_id\": 33,\r\n                            \"term_template_key\": \"residential_auto_renewal\",\r\n                            \"enabled\": true,\r\n                            \"answers\": {\r\n                                \"cancel_auto_renewal_notice_period_in_days\": 60\r\n                            }\r\n                        }\r\n                    }\r\n                ]\r\n            }\r\n        }\r\n    },\r\n    \"custom_terms\": [\r\n        {\r\n            \"body\": \"شرط 1\"\r\n        },\r\n        {\r\n            \"body\": \"شرط 2\"\r\n        }\r\n    ]\r\n}"
               }
             }
           }
@@ -771,6 +1185,111 @@
               "type": "string"
             },
             "example": "application/json"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/b2b/v1/contracts/{id}": {
+      "get": {
+        "tags": [
+          "Cotracts"
+        ],
+        "summary": "Show Contract",
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true,
+            "example": "6199"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Cotracts"
+        ],
+        "summary": "Update Contract",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": "{\r\n    // Contract details\r\n    \"start_date\": \"2024-06-07\", //start date\r\n     \"end_date\": \"2024-06-07\" //end date\r\n   \r\n}"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true,
+            "example": "6"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/b2b/v1/contracts/{contract_id}/terms-template": {
+      "get": {
+        "tags": [
+          "Cotracts"
+        ],
+        "summary": "List All terms-template",
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          },
+          {
+            "name": "contract_id",
+            "in": "path",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true,
+            "example": "6197"
           }
         ],
         "responses": {
@@ -799,13 +1318,27 @@
             "example": "application/json"
           },
           {
+            "name": "reason_template_id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "other_reason",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
             "name": "contract_id",
             "in": "path",
             "schema": {
               "type": "integer"
             },
             "required": true,
-            "example": "19"
+            "example": "18"
           }
         ],
         "responses": {
@@ -818,18 +1351,56 @@
         }
       }
     },
-    "/b2b/v1/contracts/{id}": {
-      "put": {
+    "/b2b/v1/order/initial-contract": {
+      "post": {
         "tags": [
-          "Cotracts"
+          "Order Steps > Step 1"
         ],
-        "summary": "Update Contract",
+        "summary": "initail Contract",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
                 "type": "object",
-                "example": "{\r\n    // Contract details\r\n    \"start_date\": \"2024-06-07\", //start date\r\n     \"end_date\": \"2024-06-07\" //end date\r\n   \r\n}"
+                "example": "{\r\n    // Contract details\r\n    \"duration\": 2, //Type in years \r\n    \"duration_type\": \"year\",\r\n    \"contract_type\": \"residential\" // Type of contract (options: residential, commercial)\r\n}"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/b2b/v1/order/{contract_id}/assign-property": {
+      "post": {
+        "tags": [
+          "Order Steps > Step 2"
+        ],
+        "summary": "Assign Property",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "property_id": 1
+                }
               }
             }
           }
@@ -844,13 +1415,433 @@
             "example": "application/json"
           },
           {
-            "name": "id",
+            "name": "contract_id",
             "in": "path",
             "schema": {
               "type": "integer"
             },
             "required": true,
-            "example": "6"
+            "example": "6199"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/b2b/v1/order/{contract_id}/assign-unit": {
+      "post": {
+        "tags": [
+          "Order Steps > Step 2"
+        ],
+        "summary": "Assign Unit",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "unit_id": 9310
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          },
+          {
+            "name": "contract_id",
+            "in": "path",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true,
+            "example": "6199"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/b2b/v1/order/{contract_id}/assign-party": {
+      "post": {
+        "tags": [
+          "Order Steps > Step 4"
+        ],
+        "summary": "Assign Party",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": "{\r\n   \"id_number\":\"1061608236\",\r\n   \"type\":\"tenant\"//owner,tenant,owner_rep,tenant_rep\r\n}"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          },
+          {
+            "name": "contract_id",
+            "in": "path",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true,
+            "example": "6199"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/b2b/v1/order/{contract_id}/replace-party": {
+      "post": {
+        "tags": [
+          "Order Steps > Step 4"
+        ],
+        "summary": "Replace Party",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": "{\r\n    \"old_party_id\": 9310,\r\n    \"id_number\": \"1061608236\",\r\n    \"type\": \"owner\" //owner,tenant,owner_rep,tenant_rep\r\n}"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          },
+          {
+            "name": "contract_id",
+            "in": "path",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true,
+            "example": "6199"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/b2b/v1/order/{contract_id}/delete-party": {
+      "delete": {
+        "tags": [
+          "Order Steps > Step 4"
+        ],
+        "summary": "Delete Party",
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          },
+          {
+            "name": "contract_id",
+            "in": "path",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true,
+            "example": "6199"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/b2b/v1/order/{contract_id}/add-update-financials": {
+      "post": {
+        "tags": [
+          "Order Steps > Step 5"
+        ],
+        "summary": "Add Update Finacial",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": "{\r\n    \"data_financial\": {\r\n        \"rental_fees_id\":\"36098773\",//for update\r\n        \"total_units_rent\": \"10000\",\r\n        \"total_paid_rent\": null,\r\n        \"total_paid_services\": null,\r\n        \"rent_type\": \"for_all_units\",\r\n        \"billing_type\": \"monthly\", // Billing type (options: monthly, quarterly, bi-annual, annual, one_time_pay)\r\n        \"extra_options\": 1,\r\n        \"security_deposit_required\": 1,\r\n        \"security_deposit_fee\": 125,\r\n        \"late_fees_charged_required\": 1,\r\n        \"late_fees_charged_fee\": 0,\r\n        \"retainer_required\": 0,\r\n        \"retainer_fee\": 0,\r\n        \"brokerage_required\": 0,\r\n        \"brokerage_fee\": 0,\r\n        \"brokerage_fee_paid_by\": \"lessor\",//'tenant', 'owner', 'both'\r\n        \"brokerage_fee_due_date\": \"2024-06-01\",\r\n        \"engineering_supervision_required\": 0,\r\n        \"engineering_supervision_fee\": \"0\",\r\n        \"unit_finishing_required\": 0,\r\n        \"unit_finishing_fee\": \"0\",\r\n        \"waste_removal_required\": 0,\r\n        \"waste_removal_fee\": \"0\",\r\n        \"iban_number\": \"SA0380000000608010167519\",\r\n        \"utilities_on\": 1,\r\n        \"electricity_meter\": \"1\",\r\n        \"electricity_reading\": null,\r\n        \"electricity_amount\": null,\r\n        \"electricity_method\": \"metered_fee\",\r\n        \"water_meter\": \"1\",\r\n        \"water_reading\": null,\r\n        \"water_amount\": null,\r\n        \"water_method\": \"metered_fee\",\r\n        \"gas_meter\": \"1\",\r\n        \"gas_reading\": null,\r\n        \"gas_amount\": null,\r\n        \"gas_method\": \"metered_fee\",\r\n        \"commercial_services_fees_required\": false,\r\n        \"commercial_services_fees\": null,\r\n        \"dynamic_rent_required\": false,\r\n        \"dynamic_rent\": null,\r\n        \"utilities_and_services_required\": false,\r\n        \"parking_amount\": null,\r\n        \"parking_method\": \"false\",\r\n        \"created_at\": \"2024-12-10T16:08:03.000000Z\",\r\n        \"updated_at\": \"2024-12-10T16:08:05.000000Z\",\r\n        \"commercial_services_fees_data\": {\r\n            \"sewage_fees\": {\r\n                \"amount\": 0,\r\n                \"currency\": \"sar\"\r\n            },\r\n            \"maintenance\": {\r\n                \"amount\": 0,\r\n                \"currency\": \"sar\"\r\n            },\r\n            \"cleaning_services\": {\r\n                \"amount\": 0,\r\n                \"currency\": \"sar\"\r\n            },\r\n            \"security\": {\r\n                \"amount\": 0,\r\n                \"currency\": \"sar\"\r\n            }\r\n        },\r\n        \"dynamic_rent_data\": {\r\n            \"dynamic_rent_type\": \"percentage\",\r\n            \"dynamic_rent_growth\": \"increasing\",\r\n            \"percentages\": []\r\n        }\r\n    }\r\n}"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          },
+          {
+            "name": "contract_id",
+            "in": "path",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true,
+            "example": "6199"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/b2b/v1/order/{contract_id}/template-terms": {
+      "get": {
+        "tags": [
+          "Order Steps > Step 6"
+        ],
+        "summary": "Template Terms",
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          },
+          {
+            "name": "contract_id",
+            "in": "path",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true,
+            "example": "6199"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/b2b/v1/order/{contract_id}/add-update-terms": {
+      "post": {
+        "tags": [
+          "Order Steps > Step 6"
+        ],
+        "summary": "Add/Udate Terms",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "data_terms": {
+                    "type": "contract_terms",
+                    "attributes": {
+                      "term_type": "residential",
+                      "ejar_fees_paid_by": "brokerage_office"
+                    },
+                    "relationships": {
+                      "contract_term_answers": {
+                        "data": [
+                          {
+                            "type": "contract_term_answers",
+                            "attributes": {
+                              "term_template_id": 36,
+                              "term_template_key": "tenant_can_sublease",
+                              "enabled": true
+                            }
+                          },
+                          {
+                            "type": "contract_term_answers",
+                            "attributes": {
+                              "term_template_id": 39,
+                              "term_template_key": "residential_followup_with_authorities",
+                              "enabled": true
+                            }
+                          },
+                          {
+                            "type": "contract_term_answers",
+                            "attributes": {
+                              "term_template_id": 40,
+                              "term_template_key": "renovations_and_improvements_rental_unit",
+                              "enabled": true
+                            }
+                          },
+                          {
+                            "type": "contract_term_answers",
+                            "attributes": {
+                              "term_template_id": 41,
+                              "term_template_key": "modification_rental_unit",
+                              "enabled": true
+                            }
+                          },
+                          {
+                            "type": "contract_term_answers",
+                            "attributes": {
+                              "term_template_id": 42,
+                              "term_template_key": "governing_law_and_dispute_resolution",
+                              "enabled": true,
+                              "answers": {
+                                "governing_law_and_dispute_resolution_option": "real_estate_arbitration"
+                              }
+                            }
+                          },
+                          {
+                            "type": "contract_term_answers",
+                            "attributes": {
+                              "term_template_id": 33,
+                              "term_template_key": "residential_auto_renewal",
+                              "enabled": true,
+                              "answers": {
+                                "cancel_auto_renewal_notice_period_in_days": 60
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  "custom_terms": [
+                    {
+                      "body": "شرط 1"
+                    },
+                    {
+                      "body": "شرط 2"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          },
+          {
+            "name": "contract_id",
+            "in": "path",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true,
+            "example": "6199"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/b2b/v1/order/{contract_id}/submit": {
+      "post": {
+        "tags": [
+          "Order Steps > Step 7"
+        ],
+        "summary": "Submit Contract",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "review": 0
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          },
+          {
+            "name": "contract_id",
+            "in": "path",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true,
+            "example": "6199"
           }
         ],
         "responses": {
